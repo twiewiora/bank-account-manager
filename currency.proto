@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "gen.grpc";
+option java_outer_classname = "CurrencyProto";
+option objc_class_prefix = "HLW";
+
+package currency;
+
+enum Currency {
+    EUR = 0;
+    USD = 1;
+    CHF = 2;
+}
+
+message CurrencyValue {
+    Currency currency = 1;
+    double value = 2;
+}
+
+message CurrencyValueList {
+    repeated CurrencyValue values = 1;
+}
+
+message CurrencyList {
+    repeated Currency currency = 1;
+}
+
+service StreamCurrency {
+    rpc GetCurrenciesStream(CurrencyList) returns (stream CurrencyValue) {}
+    rpc GetCurrencyStates(CurrencyList) returns (CurrencyValueList) {}
+}
