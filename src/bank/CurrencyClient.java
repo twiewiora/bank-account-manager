@@ -2,7 +2,6 @@ package bank;
 
 import gen.grpc.*;
 import gen.grpc.Currency;
-import gen.thrift.CurrencyType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;

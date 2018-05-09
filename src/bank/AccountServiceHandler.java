@@ -3,7 +3,6 @@ package bank;
 import gen.thrift.AccountService;
 import gen.thrift.AuthenticationException;
 import gen.thrift.Money;
-import org.apache.thrift.TException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

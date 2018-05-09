@@ -11,10 +11,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class BankClient {
 
     public static final Integer PORT = 9091;
+
+    private static final DecimalFormat df = new DecimalFormat("###.##");
 
     public static void main(String [] args) {
 
@@ -202,8 +205,7 @@ public class BankClient {
                     System.out.println("=============================================================");
                     System.out.println("Please fill a form:");
                     System.out.print("Loan currency: ");
-                    String loanCurrencyString = input.readLine();
-                    loan.setCurrency(CurrencyType.valueOf(loanCurrencyString));
+                    loan.setCurrency(CurrencyType.valueOf(input.readLine()));
                     System.out.print("Loan value: ");
                     loan.setValue(Double.parseDouble(input.readLine()));
                     System.out.print("Months: ");
@@ -213,9 +215,10 @@ public class BankClient {
                     LoanResponse loanResponse = premiumAccountServiceClient.applyForLoan(userID, loanRequest);
 
                     System.out.println("=============================================================");
-                    System.out.println("1. Monthly loan cost(PLN): " + loanResponse.getLocalCurrencyCost());
-                    System.out.println("2. Monthly loan cost(" + loanCurrencyString + "): "
-                            + loanResponse.getForeignCurrencyCost());
+                    System.out.println("1. Monthly loan cost("+ loanResponse.getLocalCurrencyCost().getCurrency()
+                            + "): " + df.format(loanResponse.getLocalCurrencyCost().getValue()));
+                    System.out.println("2. Monthly loan cost(" + loanResponse.getForeignCurrencyCost().getCurrency()
+                            + "): " + df.format(loanResponse.getForeignCurrencyCost().getValue()));
                     System.out.println("=============================================================");
                 } else if (line.toLowerCase().equals("logout") || line.equals("3")) {
                     System.out.println("=============================================================");

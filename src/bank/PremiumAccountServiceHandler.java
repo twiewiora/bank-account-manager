@@ -42,15 +42,15 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
             switch (request.getValue().getCurrency()) {
                 case EUR:
                     loanResponse.setLocalCurrencyCost(new Money(calculateLoanCostToLocalCurrency(
-                            loanCost, CurrencyType.EUR).doubleValue(), CurrencyType.EUR));
+                            loanCost, CurrencyType.EUR).doubleValue(), CurrencyType.PLN));
                     break;
                 case USD:
                     loanResponse.setLocalCurrencyCost(new Money(calculateLoanCostToLocalCurrency(
-                            loanCost, CurrencyType.USD).doubleValue(), CurrencyType.USD));
+                            loanCost, CurrencyType.USD).doubleValue(), CurrencyType.PLN));
                     break;
                 case CHF:
                     loanResponse.setLocalCurrencyCost(new Money(calculateLoanCostToLocalCurrency(
-                            loanCost, CurrencyType.CHF).doubleValue(), CurrencyType.CHF));
+                            loanCost, CurrencyType.CHF).doubleValue(), CurrencyType.PLN));
                     break;
                 default:
                     logger.log(Level.WARNING, "NotSupportedCurrencyException was thrown for user(ID:{0})", userID);
@@ -84,21 +84,15 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
     }
 
     private BigDecimal getCurrencyState(CurrencyType currencyType) {
-        BigDecimal currencyValue;
         switch (currencyType) {
             case EUR:
-                currencyValue = BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.EUR));
-                break;
+                return BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.EUR));
             case USD:
-                currencyValue = BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.USD));
-                break;
+                return BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.USD));
             case CHF:
-                currencyValue = BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.CHF));
-                break;
+                return BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.CHF));
             default:
-                currencyValue = BigDecimal.ZERO;
-                break;
+                return BigDecimal.ZERO;
         }
-        return currencyValue;
     }
 }
