@@ -2,6 +2,7 @@ package bank;
 
 import gen.grpc.*;
 import gen.grpc.Currency;
+import gen.thrift.CurrencyType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -28,6 +29,11 @@ public class CurrencyClient implements Runnable {
 				.build();
 
         streamCurrencyBlockingStub = StreamCurrencyGrpc.newBlockingStub(channel);
+
+        for (Currency currency : currencies) {
+            if (!currency.equals(Currency.PLN))
+            currencyMap.put(currency, 3.0);
+        }
 	}
 
 	@Override
@@ -48,7 +54,7 @@ public class CurrencyClient implements Runnable {
                     CurrencyValue currencyValue = currencyValueIterator.next();
 
                     currencyMap.put(currencyValue.getCurrency(), currencyValue.getValue());
-//                    logger.log(Level.INFO, "[Update] Currency: " + currencyValue.getCurrency().toString() + " :: " + currencyValue.getValue());
+                    logger.log(Level.INFO, "[Update] Currency: " + currencyValue.getCurrency().toString() + " :: " + currencyValue.getValue());
                 }
             } catch (StatusRuntimeException ex) {
                 logger.log(Level.WARNING, "RPC failed: {0}", ex.getStatus());

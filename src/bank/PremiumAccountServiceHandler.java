@@ -84,15 +84,21 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
     }
 
     private BigDecimal getCurrencyState(CurrencyType currencyType) {
+        BigDecimal currencyValue;
         switch (currencyType) {
             case EUR:
-                return BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.EUR));
+                currencyValue = BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.EUR));
+                break;
             case USD:
-                return BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.USD));
+                currencyValue = BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.USD));
+                break;
             case CHF:
-                return BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.CHF));
+                currencyValue = BigDecimal.valueOf(bankServer.getCurrencyClient().getCurrencyCource(Currency.CHF));
+                break;
             default:
-                return BigDecimal.ZERO;
+                currencyValue = BigDecimal.ZERO;
+                break;
         }
+        return currencyValue;
     }
 }

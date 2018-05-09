@@ -31,7 +31,7 @@ public class BankServer {
     public static void main(String [] args) {
         final BankServer bankServer = new BankServer();
         logger.log(Level.INFO, "Starting currencyClient on BankServer ...");
-        new Thread(bankServer.currencyClient).start();
+        new Thread(bankServer.getCurrencyClient()).start();
         bankServer.start();
     }
 
@@ -55,7 +55,7 @@ public class BankServer {
                             .protocolFactory(protocolFactory)
                             .processor(multiplex));
 
-            logger.log(Level.INFO, "Starting the multiplex server...");
+            logger.log(Level.INFO, "Starting the Bank Server...");
             server.serve();
         } catch (Exception e) {
             e.printStackTrace();
