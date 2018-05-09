@@ -39,6 +39,10 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
 
             loanResponse.setForeignCurrencyCost(new Money(loanCost.doubleValue(), request.getValue().getCurrency()));
 
+            if (!bankServer.getCurrencies().contains(bankServer.thriftToGrpcCurrency(request.getValue().getCurrency()))) {
+                logger.log(Level.WARNING, "NotSupportedCurrencyException was thrown for user(ID:{0})", userID);
+                throw new NotSupportedCurrencyException();
+            }
             switch (request.getValue().getCurrency()) {
                 case EUR:
                     loanResponse.setLocalCurrencyCost(new Money(calculateLoanCostToLocalCurrency(
@@ -52,9 +56,6 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
                     loanResponse.setLocalCurrencyCost(new Money(calculateLoanCostToLocalCurrency(
                             loanCost, CurrencyType.CHF).doubleValue(), CurrencyType.PLN));
                     break;
-                default:
-                    logger.log(Level.WARNING, "NotSupportedCurrencyException was thrown for user(ID:{0})", userID);
-                    throw new NotSupportedCurrencyException();
             }
             logger.log(Level.INFO, "Request apply for loan from user(ID:{0})", userID);
             return loanResponse;

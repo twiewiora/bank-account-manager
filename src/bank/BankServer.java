@@ -12,6 +12,7 @@ import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -22,9 +23,12 @@ public class BankServer {
     private static final Logger logger = Logger.getLogger(BankServer.class.getName());
 
     private final int PORT = 9091;
+//    private final int PORT = 9092;
 
-    private CurrencyClient currencyClient = new CurrencyClient("localhost", 50051,
-            Arrays.asList(Currency.EUR, Currency.USD, Currency.CHF, Currency.PLN));
+    private final List<Currency> currencies = Arrays.asList(Currency.EUR, Currency.USD, Currency.CHF, Currency.PLN);
+//    private final List<Currency> currencies = Arrays.asList(Currency.EUR, Currency.USD, Currency.PLN);
+
+    private CurrencyClient currencyClient = new CurrencyClient("localhost", 50051, currencies);
 
     private Map<Integer, BankAccount> usersMap = new ConcurrentHashMap<>();
 
@@ -84,18 +88,7 @@ public class BankServer {
         return currencyClient;
     }
 
-    //    public static void multithread()
-//    {
-//        try {
-//            Calculator.Processor<CalculatorHandler> processor = new Calculator.Processor<CalculatorHandler>(new CalculatorHandler(1));
-//            TNonblockingServerTransport nonblockserverTransport = new TNonblockingServerSocket(9092);
-//
-//            // Use this for a multithreaded server
-//            TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(nonblockserverTransport).processor(processor));
-//            System.out.println("Starting the multithread server...");
-//            server.serve();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public List<Currency> getCurrencies() {
+        return currencies;
+    }
 }
