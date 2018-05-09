@@ -11,25 +11,25 @@ package gen.thrift;
 public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, java.io.Serializable, Cloneable, Comparable<Money> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("Money");
 
-  private static final org.apache.thrift.protocol.TField VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("value", org.apache.thrift.protocol.TType.I32, (short)1);
+  private static final org.apache.thrift.protocol.TField VALUE_FIELD_DESC = new org.apache.thrift.protocol.TField("value", org.apache.thrift.protocol.TType.DOUBLE, (short)1);
   private static final org.apache.thrift.protocol.TField CURRENCY_FIELD_DESC = new org.apache.thrift.protocol.TField("currency", org.apache.thrift.protocol.TType.I32, (short)2);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new MoneyStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new MoneyTupleSchemeFactory();
 
-  public int value; // required
+  public double value; // required
   /**
    * 
-   * @see Currency
+   * @see CurrencyType
    */
-  public Currency currency; // required
+  public CurrencyType currency; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     VALUE((short)1, "value"),
     /**
      * 
-     * @see Currency
+     * @see CurrencyType
      */
     CURRENCY((short)2, "currency");
 
@@ -96,9 +96,9 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.VALUE, new org.apache.thrift.meta_data.FieldMetaData("value", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.CURRENCY, new org.apache.thrift.meta_data.FieldMetaData("currency", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, Currency.class)));
+        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, CurrencyType.class)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Money.class, metaDataMap);
   }
@@ -107,8 +107,8 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
   }
 
   public Money(
-    int value,
-    Currency currency)
+    double value,
+    CurrencyType currency)
   {
     this();
     this.value = value;
@@ -134,15 +134,15 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
   @Override
   public void clear() {
     setValueIsSet(false);
-    this.value = 0;
+    this.value = 0.0;
     this.currency = null;
   }
 
-  public int getValue() {
+  public double getValue() {
     return this.value;
   }
 
-  public Money setValue(int value) {
+  public Money setValue(double value) {
     this.value = value;
     setValueIsSet(true);
     return this;
@@ -163,17 +163,17 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
 
   /**
    * 
-   * @see Currency
+   * @see CurrencyType
    */
-  public Currency getCurrency() {
+  public CurrencyType getCurrency() {
     return this.currency;
   }
 
   /**
    * 
-   * @see Currency
+   * @see CurrencyType
    */
-  public Money setCurrency(Currency currency) {
+  public Money setCurrency(CurrencyType currency) {
     this.currency = currency;
     return this;
   }
@@ -199,7 +199,7 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
       if (value == null) {
         unsetValue();
       } else {
-        setValue((java.lang.Integer)value);
+        setValue((java.lang.Double)value);
       }
       break;
 
@@ -207,7 +207,7 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
       if (value == null) {
         unsetCurrency();
       } else {
-        setCurrency((Currency)value);
+        setCurrency((CurrencyType)value);
       }
       break;
 
@@ -281,7 +281,7 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
   public int hashCode() {
     int hashCode = 1;
 
-    hashCode = hashCode * 8191 + value;
+    hashCode = hashCode * 8191 + org.apache.thrift.TBaseHelper.hashCode(value);
 
     hashCode = hashCode * 8191 + ((isSetCurrency()) ? 131071 : 524287);
     if (isSetCurrency())
@@ -395,8 +395,8 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
         }
         switch (schemeField.id) {
           case 1: // VALUE
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.value = iprot.readI32();
+            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+              struct.value = iprot.readDouble();
               struct.setValueIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -404,7 +404,7 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
             break;
           case 2: // CURRENCY
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.currency = Currency.findByValue(iprot.readI32());
+              struct.currency = CurrencyType.findByValue(iprot.readI32());
               struct.setCurrencyIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -426,7 +426,7 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
 
       oprot.writeStructBegin(STRUCT_DESC);
       oprot.writeFieldBegin(VALUE_FIELD_DESC);
-      oprot.writeI32(struct.value);
+      oprot.writeDouble(struct.value);
       oprot.writeFieldEnd();
       if (struct.currency != null) {
         oprot.writeFieldBegin(CURRENCY_FIELD_DESC);
@@ -459,7 +459,7 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
       }
       oprot.writeBitSet(optionals, 2);
       if (struct.isSetValue()) {
-        oprot.writeI32(struct.value);
+        oprot.writeDouble(struct.value);
       }
       if (struct.isSetCurrency()) {
         oprot.writeI32(struct.currency.getValue());
@@ -471,11 +471,11 @@ public class Money implements org.apache.thrift.TBase<Money, Money._Fields>, jav
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       java.util.BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
-        struct.value = iprot.readI32();
+        struct.value = iprot.readDouble();
         struct.setValueIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.currency = Currency.findByValue(iprot.readI32());
+        struct.currency = CurrencyType.findByValue(iprot.readI32());
         struct.setCurrencyIsSet(true);
       }
     }

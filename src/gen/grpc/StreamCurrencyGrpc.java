@@ -87,7 +87,7 @@ public final class StreamCurrencyGrpc {
       asyncUnimplementedUnaryCall(METHOD_GET_CURRENCY_STATES, responseObserver);
     }
 
-    public final io.grpc.ServerServiceDefinition bindService() {
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             METHOD_GET_CURRENCIES_STREAM,
@@ -219,6 +219,8 @@ public final class StreamCurrencyGrpc {
       this.methodId = methodId;
     }
 
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_CURRENCIES_STREAM:
@@ -234,6 +236,8 @@ public final class StreamCurrencyGrpc {
       }
     }
 
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
@@ -244,6 +248,7 @@ public final class StreamCurrencyGrpc {
   }
 
   private static final class StreamCurrencyDescriptorSupplier implements io.grpc.protobuf.ProtoFileDescriptorSupplier {
+    @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
       return gen.grpc.CurrencyProto.getDescriptor();
     }

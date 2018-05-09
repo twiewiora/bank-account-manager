@@ -11,24 +11,14 @@ package gen.thrift;
 public class NotSupportedCurrencyException extends org.apache.thrift.TException implements org.apache.thrift.TBase<NotSupportedCurrencyException, NotSupportedCurrencyException._Fields>, java.io.Serializable, Cloneable, Comparable<NotSupportedCurrencyException> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("NotSupportedCurrencyException");
 
-  private static final org.apache.thrift.protocol.TField CURRENCY_FIELD_DESC = new org.apache.thrift.protocol.TField("currency", org.apache.thrift.protocol.TType.I32, (short)1);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new NotSupportedCurrencyExceptionStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new NotSupportedCurrencyExceptionTupleSchemeFactory();
 
-  /**
-   * 
-   * @see Currency
-   */
-  public Currency currency; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    /**
-     * 
-     * @see Currency
-     */
-    CURRENCY((short)1, "currency");
+;
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -43,8 +33,6 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // CURRENCY
-          return CURRENCY;
         default:
           return null;
       }
@@ -83,13 +71,9 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
       return _fieldName;
     }
   }
-
-  // isset id assignments
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.CURRENCY, new org.apache.thrift.meta_data.FieldMetaData("currency", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, Currency.class)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(NotSupportedCurrencyException.class, metaDataMap);
   }
@@ -97,20 +81,10 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
   public NotSupportedCurrencyException() {
   }
 
-  public NotSupportedCurrencyException(
-    Currency currency)
-  {
-    this();
-    this.currency = currency;
-  }
-
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public NotSupportedCurrencyException(NotSupportedCurrencyException other) {
-    if (other.isSetCurrency()) {
-      this.currency = other.currency;
-    }
   }
 
   public NotSupportedCurrencyException deepCopy() {
@@ -119,59 +93,15 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
 
   @Override
   public void clear() {
-    this.currency = null;
-  }
-
-  /**
-   * 
-   * @see Currency
-   */
-  public Currency getCurrency() {
-    return this.currency;
-  }
-
-  /**
-   * 
-   * @see Currency
-   */
-  public NotSupportedCurrencyException setCurrency(Currency currency) {
-    this.currency = currency;
-    return this;
-  }
-
-  public void unsetCurrency() {
-    this.currency = null;
-  }
-
-  /** Returns true if field currency is set (has been assigned a value) and false otherwise */
-  public boolean isSetCurrency() {
-    return this.currency != null;
-  }
-
-  public void setCurrencyIsSet(boolean value) {
-    if (!value) {
-      this.currency = null;
-    }
   }
 
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
-    case CURRENCY:
-      if (value == null) {
-        unsetCurrency();
-      } else {
-        setCurrency((Currency)value);
-      }
-      break;
-
     }
   }
 
   public java.lang.Object getFieldValue(_Fields field) {
     switch (field) {
-    case CURRENCY:
-      return getCurrency();
-
     }
     throw new java.lang.IllegalStateException();
   }
@@ -183,8 +113,6 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
     }
 
     switch (field) {
-    case CURRENCY:
-      return isSetCurrency();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -204,25 +132,12 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
     if (this == that)
       return true;
 
-    boolean this_present_currency = true && this.isSetCurrency();
-    boolean that_present_currency = true && that.isSetCurrency();
-    if (this_present_currency || that_present_currency) {
-      if (!(this_present_currency && that_present_currency))
-        return false;
-      if (!this.currency.equals(that.currency))
-        return false;
-    }
-
     return true;
   }
 
   @Override
   public int hashCode() {
     int hashCode = 1;
-
-    hashCode = hashCode * 8191 + ((isSetCurrency()) ? 131071 : 524287);
-    if (isSetCurrency())
-      hashCode = hashCode * 8191 + currency.getValue();
 
     return hashCode;
   }
@@ -235,16 +150,6 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
 
     int lastComparison = 0;
 
-    lastComparison = java.lang.Boolean.valueOf(isSetCurrency()).compareTo(other.isSetCurrency());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetCurrency()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.currency, other.currency);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
     return 0;
   }
 
@@ -265,13 +170,6 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
     java.lang.StringBuilder sb = new java.lang.StringBuilder("NotSupportedCurrencyException(");
     boolean first = true;
 
-    sb.append("currency:");
-    if (this.currency == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.currency);
-    }
-    first = false;
     sb.append(")");
     return sb.toString();
   }
@@ -315,14 +213,6 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
           break;
         }
         switch (schemeField.id) {
-          case 1: // CURRENCY
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.currency = Currency.findByValue(iprot.readI32());
-              struct.setCurrencyIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -338,11 +228,6 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.currency != null) {
-        oprot.writeFieldBegin(CURRENCY_FIELD_DESC);
-        oprot.writeI32(struct.currency.getValue());
-        oprot.writeFieldEnd();
-      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -360,24 +245,11 @@ public class NotSupportedCurrencyException extends org.apache.thrift.TException 
     @Override
     public void write(org.apache.thrift.protocol.TProtocol prot, NotSupportedCurrencyException struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet optionals = new java.util.BitSet();
-      if (struct.isSetCurrency()) {
-        optionals.set(0);
-      }
-      oprot.writeBitSet(optionals, 1);
-      if (struct.isSetCurrency()) {
-        oprot.writeI32(struct.currency.getValue());
-      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, NotSupportedCurrencyException struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-      java.util.BitSet incoming = iprot.readBitSet(1);
-      if (incoming.get(0)) {
-        struct.currency = Currency.findByValue(iprot.readI32());
-        struct.setCurrencyIsSet(true);
-      }
     }
   }
 

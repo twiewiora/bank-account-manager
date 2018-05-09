@@ -123,7 +123,7 @@ private static final long serialVersionUID = 0L;
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (currency_ != gen.grpc.Currency.EUR.getNumber()) {
+    if (currency_ != gen.grpc.Currency.PLN.getNumber()) {
       output.writeEnum(1, currency_);
     }
     if (value_ != 0D) {
@@ -137,7 +137,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (currency_ != gen.grpc.Currency.EUR.getNumber()) {
+    if (currency_ != gen.grpc.Currency.PLN.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(1, currency_);
     }

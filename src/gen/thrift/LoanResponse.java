@@ -11,19 +11,19 @@ package gen.thrift;
 public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanResponse._Fields>, java.io.Serializable, Cloneable, Comparable<LoanResponse> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("LoanResponse");
 
-  private static final org.apache.thrift.protocol.TField FOREIGN_CURRENCY_FIELD_DESC = new org.apache.thrift.protocol.TField("foreignCurrency", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-  private static final org.apache.thrift.protocol.TField LOCAL_CURRENCY_FIELD_DESC = new org.apache.thrift.protocol.TField("localCurrency", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+  private static final org.apache.thrift.protocol.TField FOREIGN_CURRENCY_COST_FIELD_DESC = new org.apache.thrift.protocol.TField("foreignCurrencyCost", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+  private static final org.apache.thrift.protocol.TField LOCAL_CURRENCY_COST_FIELD_DESC = new org.apache.thrift.protocol.TField("localCurrencyCost", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new LoanResponseStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new LoanResponseTupleSchemeFactory();
 
-  public Money foreignCurrency; // required
-  public Money localCurrency; // required
+  public Money foreignCurrencyCost; // required
+  public Money localCurrencyCost; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-    FOREIGN_CURRENCY((short)1, "foreignCurrency"),
-    LOCAL_CURRENCY((short)2, "localCurrency");
+    FOREIGN_CURRENCY_COST((short)1, "foreignCurrencyCost"),
+    LOCAL_CURRENCY_COST((short)2, "localCurrencyCost");
 
     private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -38,10 +38,10 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
      */
     public static _Fields findByThriftId(int fieldId) {
       switch(fieldId) {
-        case 1: // FOREIGN_CURRENCY
-          return FOREIGN_CURRENCY;
-        case 2: // LOCAL_CURRENCY
-          return LOCAL_CURRENCY;
+        case 1: // FOREIGN_CURRENCY_COST
+          return FOREIGN_CURRENCY_COST;
+        case 2: // LOCAL_CURRENCY_COST
+          return LOCAL_CURRENCY_COST;
         default:
           return null;
       }
@@ -85,9 +85,9 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.FOREIGN_CURRENCY, new org.apache.thrift.meta_data.FieldMetaData("foreignCurrency", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.FOREIGN_CURRENCY_COST, new org.apache.thrift.meta_data.FieldMetaData("foreignCurrencyCost", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Money.class)));
-    tmpMap.put(_Fields.LOCAL_CURRENCY, new org.apache.thrift.meta_data.FieldMetaData("localCurrency", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.LOCAL_CURRENCY_COST, new org.apache.thrift.meta_data.FieldMetaData("localCurrencyCost", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Money.class)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(LoanResponse.class, metaDataMap);
@@ -97,23 +97,23 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
   }
 
   public LoanResponse(
-    Money foreignCurrency,
-    Money localCurrency)
+    Money foreignCurrencyCost,
+    Money localCurrencyCost)
   {
     this();
-    this.foreignCurrency = foreignCurrency;
-    this.localCurrency = localCurrency;
+    this.foreignCurrencyCost = foreignCurrencyCost;
+    this.localCurrencyCost = localCurrencyCost;
   }
 
   /**
    * Performs a deep copy on <i>other</i>.
    */
   public LoanResponse(LoanResponse other) {
-    if (other.isSetForeignCurrency()) {
-      this.foreignCurrency = new Money(other.foreignCurrency);
+    if (other.isSetForeignCurrencyCost()) {
+      this.foreignCurrencyCost = new Money(other.foreignCurrencyCost);
     }
-    if (other.isSetLocalCurrency()) {
-      this.localCurrency = new Money(other.localCurrency);
+    if (other.isSetLocalCurrencyCost()) {
+      this.localCurrencyCost = new Money(other.localCurrencyCost);
     }
   }
 
@@ -123,73 +123,73 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
 
   @Override
   public void clear() {
-    this.foreignCurrency = null;
-    this.localCurrency = null;
+    this.foreignCurrencyCost = null;
+    this.localCurrencyCost = null;
   }
 
-  public Money getForeignCurrency() {
-    return this.foreignCurrency;
+  public Money getForeignCurrencyCost() {
+    return this.foreignCurrencyCost;
   }
 
-  public LoanResponse setForeignCurrency(Money foreignCurrency) {
-    this.foreignCurrency = foreignCurrency;
+  public LoanResponse setForeignCurrencyCost(Money foreignCurrencyCost) {
+    this.foreignCurrencyCost = foreignCurrencyCost;
     return this;
   }
 
-  public void unsetForeignCurrency() {
-    this.foreignCurrency = null;
+  public void unsetForeignCurrencyCost() {
+    this.foreignCurrencyCost = null;
   }
 
-  /** Returns true if field foreignCurrency is set (has been assigned a value) and false otherwise */
-  public boolean isSetForeignCurrency() {
-    return this.foreignCurrency != null;
+  /** Returns true if field foreignCurrencyCost is set (has been assigned a value) and false otherwise */
+  public boolean isSetForeignCurrencyCost() {
+    return this.foreignCurrencyCost != null;
   }
 
-  public void setForeignCurrencyIsSet(boolean value) {
+  public void setForeignCurrencyCostIsSet(boolean value) {
     if (!value) {
-      this.foreignCurrency = null;
+      this.foreignCurrencyCost = null;
     }
   }
 
-  public Money getLocalCurrency() {
-    return this.localCurrency;
+  public Money getLocalCurrencyCost() {
+    return this.localCurrencyCost;
   }
 
-  public LoanResponse setLocalCurrency(Money localCurrency) {
-    this.localCurrency = localCurrency;
+  public LoanResponse setLocalCurrencyCost(Money localCurrencyCost) {
+    this.localCurrencyCost = localCurrencyCost;
     return this;
   }
 
-  public void unsetLocalCurrency() {
-    this.localCurrency = null;
+  public void unsetLocalCurrencyCost() {
+    this.localCurrencyCost = null;
   }
 
-  /** Returns true if field localCurrency is set (has been assigned a value) and false otherwise */
-  public boolean isSetLocalCurrency() {
-    return this.localCurrency != null;
+  /** Returns true if field localCurrencyCost is set (has been assigned a value) and false otherwise */
+  public boolean isSetLocalCurrencyCost() {
+    return this.localCurrencyCost != null;
   }
 
-  public void setLocalCurrencyIsSet(boolean value) {
+  public void setLocalCurrencyCostIsSet(boolean value) {
     if (!value) {
-      this.localCurrency = null;
+      this.localCurrencyCost = null;
     }
   }
 
   public void setFieldValue(_Fields field, java.lang.Object value) {
     switch (field) {
-    case FOREIGN_CURRENCY:
+    case FOREIGN_CURRENCY_COST:
       if (value == null) {
-        unsetForeignCurrency();
+        unsetForeignCurrencyCost();
       } else {
-        setForeignCurrency((Money)value);
+        setForeignCurrencyCost((Money)value);
       }
       break;
 
-    case LOCAL_CURRENCY:
+    case LOCAL_CURRENCY_COST:
       if (value == null) {
-        unsetLocalCurrency();
+        unsetLocalCurrencyCost();
       } else {
-        setLocalCurrency((Money)value);
+        setLocalCurrencyCost((Money)value);
       }
       break;
 
@@ -198,11 +198,11 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
 
   public java.lang.Object getFieldValue(_Fields field) {
     switch (field) {
-    case FOREIGN_CURRENCY:
-      return getForeignCurrency();
+    case FOREIGN_CURRENCY_COST:
+      return getForeignCurrencyCost();
 
-    case LOCAL_CURRENCY:
-      return getLocalCurrency();
+    case LOCAL_CURRENCY_COST:
+      return getLocalCurrencyCost();
 
     }
     throw new java.lang.IllegalStateException();
@@ -215,10 +215,10 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
     }
 
     switch (field) {
-    case FOREIGN_CURRENCY:
-      return isSetForeignCurrency();
-    case LOCAL_CURRENCY:
-      return isSetLocalCurrency();
+    case FOREIGN_CURRENCY_COST:
+      return isSetForeignCurrencyCost();
+    case LOCAL_CURRENCY_COST:
+      return isSetLocalCurrencyCost();
     }
     throw new java.lang.IllegalStateException();
   }
@@ -238,21 +238,21 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
     if (this == that)
       return true;
 
-    boolean this_present_foreignCurrency = true && this.isSetForeignCurrency();
-    boolean that_present_foreignCurrency = true && that.isSetForeignCurrency();
-    if (this_present_foreignCurrency || that_present_foreignCurrency) {
-      if (!(this_present_foreignCurrency && that_present_foreignCurrency))
+    boolean this_present_foreignCurrencyCost = true && this.isSetForeignCurrencyCost();
+    boolean that_present_foreignCurrencyCost = true && that.isSetForeignCurrencyCost();
+    if (this_present_foreignCurrencyCost || that_present_foreignCurrencyCost) {
+      if (!(this_present_foreignCurrencyCost && that_present_foreignCurrencyCost))
         return false;
-      if (!this.foreignCurrency.equals(that.foreignCurrency))
+      if (!this.foreignCurrencyCost.equals(that.foreignCurrencyCost))
         return false;
     }
 
-    boolean this_present_localCurrency = true && this.isSetLocalCurrency();
-    boolean that_present_localCurrency = true && that.isSetLocalCurrency();
-    if (this_present_localCurrency || that_present_localCurrency) {
-      if (!(this_present_localCurrency && that_present_localCurrency))
+    boolean this_present_localCurrencyCost = true && this.isSetLocalCurrencyCost();
+    boolean that_present_localCurrencyCost = true && that.isSetLocalCurrencyCost();
+    if (this_present_localCurrencyCost || that_present_localCurrencyCost) {
+      if (!(this_present_localCurrencyCost && that_present_localCurrencyCost))
         return false;
-      if (!this.localCurrency.equals(that.localCurrency))
+      if (!this.localCurrencyCost.equals(that.localCurrencyCost))
         return false;
     }
 
@@ -263,13 +263,13 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
   public int hashCode() {
     int hashCode = 1;
 
-    hashCode = hashCode * 8191 + ((isSetForeignCurrency()) ? 131071 : 524287);
-    if (isSetForeignCurrency())
-      hashCode = hashCode * 8191 + foreignCurrency.hashCode();
+    hashCode = hashCode * 8191 + ((isSetForeignCurrencyCost()) ? 131071 : 524287);
+    if (isSetForeignCurrencyCost())
+      hashCode = hashCode * 8191 + foreignCurrencyCost.hashCode();
 
-    hashCode = hashCode * 8191 + ((isSetLocalCurrency()) ? 131071 : 524287);
-    if (isSetLocalCurrency())
-      hashCode = hashCode * 8191 + localCurrency.hashCode();
+    hashCode = hashCode * 8191 + ((isSetLocalCurrencyCost()) ? 131071 : 524287);
+    if (isSetLocalCurrencyCost())
+      hashCode = hashCode * 8191 + localCurrencyCost.hashCode();
 
     return hashCode;
   }
@@ -282,22 +282,22 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
 
     int lastComparison = 0;
 
-    lastComparison = java.lang.Boolean.valueOf(isSetForeignCurrency()).compareTo(other.isSetForeignCurrency());
+    lastComparison = java.lang.Boolean.valueOf(isSetForeignCurrencyCost()).compareTo(other.isSetForeignCurrencyCost());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetForeignCurrency()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.foreignCurrency, other.foreignCurrency);
+    if (isSetForeignCurrencyCost()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.foreignCurrencyCost, other.foreignCurrencyCost);
       if (lastComparison != 0) {
         return lastComparison;
       }
     }
-    lastComparison = java.lang.Boolean.valueOf(isSetLocalCurrency()).compareTo(other.isSetLocalCurrency());
+    lastComparison = java.lang.Boolean.valueOf(isSetLocalCurrencyCost()).compareTo(other.isSetLocalCurrencyCost());
     if (lastComparison != 0) {
       return lastComparison;
     }
-    if (isSetLocalCurrency()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.localCurrency, other.localCurrency);
+    if (isSetLocalCurrencyCost()) {
+      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.localCurrencyCost, other.localCurrencyCost);
       if (lastComparison != 0) {
         return lastComparison;
       }
@@ -322,19 +322,19 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
     java.lang.StringBuilder sb = new java.lang.StringBuilder("LoanResponse(");
     boolean first = true;
 
-    sb.append("foreignCurrency:");
-    if (this.foreignCurrency == null) {
+    sb.append("foreignCurrencyCost:");
+    if (this.foreignCurrencyCost == null) {
       sb.append("null");
     } else {
-      sb.append(this.foreignCurrency);
+      sb.append(this.foreignCurrencyCost);
     }
     first = false;
     if (!first) sb.append(", ");
-    sb.append("localCurrency:");
-    if (this.localCurrency == null) {
+    sb.append("localCurrencyCost:");
+    if (this.localCurrencyCost == null) {
       sb.append("null");
     } else {
-      sb.append(this.localCurrency);
+      sb.append(this.localCurrencyCost);
     }
     first = false;
     sb.append(")");
@@ -344,11 +344,11 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
   public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
-    if (foreignCurrency != null) {
-      foreignCurrency.validate();
+    if (foreignCurrencyCost != null) {
+      foreignCurrencyCost.validate();
     }
-    if (localCurrency != null) {
-      localCurrency.validate();
+    if (localCurrencyCost != null) {
+      localCurrencyCost.validate();
     }
   }
 
@@ -386,20 +386,20 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
           break;
         }
         switch (schemeField.id) {
-          case 1: // FOREIGN_CURRENCY
+          case 1: // FOREIGN_CURRENCY_COST
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.foreignCurrency = new Money();
-              struct.foreignCurrency.read(iprot);
-              struct.setForeignCurrencyIsSet(true);
+              struct.foreignCurrencyCost = new Money();
+              struct.foreignCurrencyCost.read(iprot);
+              struct.setForeignCurrencyCostIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 2: // LOCAL_CURRENCY
+          case 2: // LOCAL_CURRENCY_COST
             if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-              struct.localCurrency = new Money();
-              struct.localCurrency.read(iprot);
-              struct.setLocalCurrencyIsSet(true);
+              struct.localCurrencyCost = new Money();
+              struct.localCurrencyCost.read(iprot);
+              struct.setLocalCurrencyCostIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
@@ -419,14 +419,14 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      if (struct.foreignCurrency != null) {
-        oprot.writeFieldBegin(FOREIGN_CURRENCY_FIELD_DESC);
-        struct.foreignCurrency.write(oprot);
+      if (struct.foreignCurrencyCost != null) {
+        oprot.writeFieldBegin(FOREIGN_CURRENCY_COST_FIELD_DESC);
+        struct.foreignCurrencyCost.write(oprot);
         oprot.writeFieldEnd();
       }
-      if (struct.localCurrency != null) {
-        oprot.writeFieldBegin(LOCAL_CURRENCY_FIELD_DESC);
-        struct.localCurrency.write(oprot);
+      if (struct.localCurrencyCost != null) {
+        oprot.writeFieldBegin(LOCAL_CURRENCY_COST_FIELD_DESC);
+        struct.localCurrencyCost.write(oprot);
         oprot.writeFieldEnd();
       }
       oprot.writeFieldStop();
@@ -447,18 +447,18 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
     public void write(org.apache.thrift.protocol.TProtocol prot, LoanResponse struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       java.util.BitSet optionals = new java.util.BitSet();
-      if (struct.isSetForeignCurrency()) {
+      if (struct.isSetForeignCurrencyCost()) {
         optionals.set(0);
       }
-      if (struct.isSetLocalCurrency()) {
+      if (struct.isSetLocalCurrencyCost()) {
         optionals.set(1);
       }
       oprot.writeBitSet(optionals, 2);
-      if (struct.isSetForeignCurrency()) {
-        struct.foreignCurrency.write(oprot);
+      if (struct.isSetForeignCurrencyCost()) {
+        struct.foreignCurrencyCost.write(oprot);
       }
-      if (struct.isSetLocalCurrency()) {
-        struct.localCurrency.write(oprot);
+      if (struct.isSetLocalCurrencyCost()) {
+        struct.localCurrencyCost.write(oprot);
       }
     }
 
@@ -467,14 +467,14 @@ public class LoanResponse implements org.apache.thrift.TBase<LoanResponse, LoanR
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       java.util.BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
-        struct.foreignCurrency = new Money();
-        struct.foreignCurrency.read(iprot);
-        struct.setForeignCurrencyIsSet(true);
+        struct.foreignCurrencyCost = new Money();
+        struct.foreignCurrencyCost.read(iprot);
+        struct.setForeignCurrencyCostIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.localCurrency = new Money();
-        struct.localCurrency.read(iprot);
-        struct.setLocalCurrencyIsSet(true);
+        struct.localCurrencyCost = new Money();
+        struct.localCurrencyCost.read(iprot);
+        struct.setLocalCurrencyCostIsSet(true);
       }
     }
   }

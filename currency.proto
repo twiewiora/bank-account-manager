@@ -8,9 +8,10 @@ option objc_class_prefix = "HLW";
 package currency;
 
 enum Currency {
-    EUR = 0;
-    USD = 1;
-    CHF = 2;
+    PLN = 0;
+    EUR = 1;
+    USD = 2;
+    CHF = 3;
 }
 
 message CurrencyValue {

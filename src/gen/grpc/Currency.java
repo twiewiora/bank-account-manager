@@ -9,32 +9,40 @@ package gen.grpc;
 public enum Currency
     implements com.google.protobuf.ProtocolMessageEnum {
   /**
-   * <code>EUR = 0;</code>
+   * <code>PLN = 0;</code>
    */
-  EUR(0),
+  PLN(0),
   /**
-   * <code>USD = 1;</code>
+   * <code>EUR = 1;</code>
    */
-  USD(1),
+  EUR(1),
   /**
-   * <code>CHF = 2;</code>
+   * <code>USD = 2;</code>
    */
-  CHF(2),
+  USD(2),
+  /**
+   * <code>CHF = 3;</code>
+   */
+  CHF(3),
   UNRECOGNIZED(-1),
   ;
 
   /**
-   * <code>EUR = 0;</code>
+   * <code>PLN = 0;</code>
    */
-  public static final int EUR_VALUE = 0;
+  public static final int PLN_VALUE = 0;
   /**
-   * <code>USD = 1;</code>
+   * <code>EUR = 1;</code>
    */
-  public static final int USD_VALUE = 1;
+  public static final int EUR_VALUE = 1;
   /**
-   * <code>CHF = 2;</code>
+   * <code>USD = 2;</code>
    */
-  public static final int CHF_VALUE = 2;
+  public static final int USD_VALUE = 2;
+  /**
+   * <code>CHF = 3;</code>
+   */
+  public static final int CHF_VALUE = 3;
 
 
   public final int getNumber() {
@@ -55,9 +63,10 @@ public enum Currency
 
   public static Currency forNumber(int value) {
     switch (value) {
-      case 0: return EUR;
-      case 1: return USD;
-      case 2: return CHF;
+      case 0: return PLN;
+      case 1: return EUR;
+      case 2: return USD;
+      case 3: return CHF;
       default: return null;
     }
   }

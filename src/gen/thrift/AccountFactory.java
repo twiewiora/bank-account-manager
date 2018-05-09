@@ -12,13 +12,13 @@ public class AccountFactory {
 
   public interface Iface {
 
-    public boolean createAccount(java.lang.String fullName, java.lang.String pesel, Money income) throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException;
+    public int createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void createAccount(java.lang.String fullName, java.lang.String pesel, Money income, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
+    public void createAccount(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -42,22 +42,20 @@ public class AccountFactory {
       super(iprot, oprot);
     }
 
-    public boolean createAccount(java.lang.String fullName, java.lang.String pesel, Money income) throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException
+    public int createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException
     {
-      send_createAccount(fullName, pesel, income);
+      send_createAccount(accountData);
       return recv_createAccount();
     }
 
-    public void send_createAccount(java.lang.String fullName, java.lang.String pesel, Money income) throws org.apache.thrift.TException
+    public void send_createAccount(AccountData accountData) throws org.apache.thrift.TException
     {
       createAccount_args args = new createAccount_args();
-      args.setFullName(fullName);
-      args.setPesel(pesel);
-      args.setIncome(income);
+      args.setAccountData(accountData);
       sendBase("createAccount", args);
     }
 
-    public boolean recv_createAccount() throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException
+    public int recv_createAccount() throws NotSupportedCurrencyException, org.apache.thrift.TException
     {
       createAccount_result result = new createAccount_result();
       receiveBase(result, "createAccount");
@@ -66,9 +64,6 @@ public class AccountFactory {
       }
       if (result.e1 != null) {
         throw result.e1;
-      }
-      if (result.e2 != null) {
-        throw result.e2;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "createAccount failed: unknown result");
     }
@@ -91,35 +86,29 @@ public class AccountFactory {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void createAccount(java.lang.String fullName, java.lang.String pesel, Money income, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
+    public void createAccount(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      createAccount_call method_call = new createAccount_call(fullName, pesel, income, resultHandler, this, ___protocolFactory, ___transport);
+      createAccount_call method_call = new createAccount_call(accountData, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class createAccount_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.Boolean> {
-      private java.lang.String fullName;
-      private java.lang.String pesel;
-      private Money income;
-      public createAccount_call(java.lang.String fullName, java.lang.String pesel, Money income, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class createAccount_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.Integer> {
+      private AccountData accountData;
+      public createAccount_call(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.fullName = fullName;
-        this.pesel = pesel;
-        this.income = income;
+        this.accountData = accountData;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("createAccount", org.apache.thrift.protocol.TMessageType.CALL, 0));
         createAccount_args args = new createAccount_args();
-        args.setFullName(fullName);
-        args.setPesel(pesel);
-        args.setIncome(income);
+        args.setAccountData(accountData);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public java.lang.Boolean getResult() throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException {
+      public java.lang.Integer getResult() throws NotSupportedCurrencyException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -167,12 +156,10 @@ public class AccountFactory {
       public createAccount_result getResult(I iface, createAccount_args args) throws org.apache.thrift.TException {
         createAccount_result result = new createAccount_result();
         try {
-          result.success = iface.createAccount(args.fullName, args.pesel, args.income);
+          result.success = iface.createAccount(args.accountData);
           result.setSuccessIsSet(true);
         } catch (NotSupportedCurrencyException e1) {
           result.e1 = e1;
-        } catch (AccountExistsException e2) {
-          result.e2 = e2;
         }
         return result;
       }
@@ -195,7 +182,7 @@ public class AccountFactory {
       return processMap;
     }
 
-    public static class createAccount<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, createAccount_args, java.lang.Boolean> {
+    public static class createAccount<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, createAccount_args, java.lang.Integer> {
       public createAccount() {
         super("createAccount");
       }
@@ -204,10 +191,10 @@ public class AccountFactory {
         return new createAccount_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean>() { 
-          public void onComplete(java.lang.Boolean o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer>() { 
+          public void onComplete(java.lang.Integer o) {
             createAccount_result result = new createAccount_result();
             result.success = o;
             result.setSuccessIsSet(true);
@@ -228,10 +215,6 @@ public class AccountFactory {
             if (e instanceof NotSupportedCurrencyException) {
               result.e1 = (NotSupportedCurrencyException) e;
               result.setE1IsSet(true);
-              msg = result;
-            } else if (e instanceof AccountExistsException) {
-              result.e2 = (AccountExistsException) e;
-              result.setE2IsSet(true);
               msg = result;
             } else if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
@@ -260,8 +243,8 @@ public class AccountFactory {
         return false;
       }
 
-      public void start(I iface, createAccount_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
-        iface.createAccount(args.fullName, args.pesel, args.income,resultHandler);
+      public void start(I iface, createAccount_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler) throws org.apache.thrift.TException {
+        iface.createAccount(args.accountData,resultHandler);
       }
     }
 
@@ -270,22 +253,16 @@ public class AccountFactory {
   public static class createAccount_args implements org.apache.thrift.TBase<createAccount_args, createAccount_args._Fields>, java.io.Serializable, Cloneable, Comparable<createAccount_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createAccount_args");
 
-    private static final org.apache.thrift.protocol.TField FULL_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("fullName", org.apache.thrift.protocol.TType.STRING, (short)1);
-    private static final org.apache.thrift.protocol.TField PESEL_FIELD_DESC = new org.apache.thrift.protocol.TField("pesel", org.apache.thrift.protocol.TType.STRING, (short)2);
-    private static final org.apache.thrift.protocol.TField INCOME_FIELD_DESC = new org.apache.thrift.protocol.TField("income", org.apache.thrift.protocol.TType.STRUCT, (short)3);
+    private static final org.apache.thrift.protocol.TField ACCOUNT_DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("accountData", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new createAccount_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new createAccount_argsTupleSchemeFactory();
 
-    public java.lang.String fullName; // required
-    public java.lang.String pesel; // required
-    public Money income; // required
+    public AccountData accountData; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      FULL_NAME((short)1, "fullName"),
-      PESEL((short)2, "pesel"),
-      INCOME((short)3, "income");
+      ACCOUNT_DATA((short)1, "accountData");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -300,12 +277,8 @@ public class AccountFactory {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // FULL_NAME
-            return FULL_NAME;
-          case 2: // PESEL
-            return PESEL;
-          case 3: // INCOME
-            return INCOME;
+          case 1: // ACCOUNT_DATA
+            return ACCOUNT_DATA;
           default:
             return null;
         }
@@ -349,12 +322,8 @@ public class AccountFactory {
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.FULL_NAME, new org.apache.thrift.meta_data.FieldMetaData("fullName", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-      tmpMap.put(_Fields.PESEL, new org.apache.thrift.meta_data.FieldMetaData("pesel", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-      tmpMap.put(_Fields.INCOME, new org.apache.thrift.meta_data.FieldMetaData("income", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, Money.class)));
+      tmpMap.put(_Fields.ACCOUNT_DATA, new org.apache.thrift.meta_data.FieldMetaData("accountData", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountData.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createAccount_args.class, metaDataMap);
     }
@@ -363,28 +332,18 @@ public class AccountFactory {
     }
 
     public createAccount_args(
-      java.lang.String fullName,
-      java.lang.String pesel,
-      Money income)
+      AccountData accountData)
     {
       this();
-      this.fullName = fullName;
-      this.pesel = pesel;
-      this.income = income;
+      this.accountData = accountData;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public createAccount_args(createAccount_args other) {
-      if (other.isSetFullName()) {
-        this.fullName = other.fullName;
-      }
-      if (other.isSetPesel()) {
-        this.pesel = other.pesel;
-      }
-      if (other.isSetIncome()) {
-        this.income = new Money(other.income);
+      if (other.isSetAccountData()) {
+        this.accountData = new AccountData(other.accountData);
       }
     }
 
@@ -394,106 +353,40 @@ public class AccountFactory {
 
     @Override
     public void clear() {
-      this.fullName = null;
-      this.pesel = null;
-      this.income = null;
+      this.accountData = null;
     }
 
-    public java.lang.String getFullName() {
-      return this.fullName;
+    public AccountData getAccountData() {
+      return this.accountData;
     }
 
-    public createAccount_args setFullName(java.lang.String fullName) {
-      this.fullName = fullName;
+    public createAccount_args setAccountData(AccountData accountData) {
+      this.accountData = accountData;
       return this;
     }
 
-    public void unsetFullName() {
-      this.fullName = null;
+    public void unsetAccountData() {
+      this.accountData = null;
     }
 
-    /** Returns true if field fullName is set (has been assigned a value) and false otherwise */
-    public boolean isSetFullName() {
-      return this.fullName != null;
+    /** Returns true if field accountData is set (has been assigned a value) and false otherwise */
+    public boolean isSetAccountData() {
+      return this.accountData != null;
     }
 
-    public void setFullNameIsSet(boolean value) {
+    public void setAccountDataIsSet(boolean value) {
       if (!value) {
-        this.fullName = null;
-      }
-    }
-
-    public java.lang.String getPesel() {
-      return this.pesel;
-    }
-
-    public createAccount_args setPesel(java.lang.String pesel) {
-      this.pesel = pesel;
-      return this;
-    }
-
-    public void unsetPesel() {
-      this.pesel = null;
-    }
-
-    /** Returns true if field pesel is set (has been assigned a value) and false otherwise */
-    public boolean isSetPesel() {
-      return this.pesel != null;
-    }
-
-    public void setPeselIsSet(boolean value) {
-      if (!value) {
-        this.pesel = null;
-      }
-    }
-
-    public Money getIncome() {
-      return this.income;
-    }
-
-    public createAccount_args setIncome(Money income) {
-      this.income = income;
-      return this;
-    }
-
-    public void unsetIncome() {
-      this.income = null;
-    }
-
-    /** Returns true if field income is set (has been assigned a value) and false otherwise */
-    public boolean isSetIncome() {
-      return this.income != null;
-    }
-
-    public void setIncomeIsSet(boolean value) {
-      if (!value) {
-        this.income = null;
+        this.accountData = null;
       }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
-      case FULL_NAME:
+      case ACCOUNT_DATA:
         if (value == null) {
-          unsetFullName();
+          unsetAccountData();
         } else {
-          setFullName((java.lang.String)value);
-        }
-        break;
-
-      case PESEL:
-        if (value == null) {
-          unsetPesel();
-        } else {
-          setPesel((java.lang.String)value);
-        }
-        break;
-
-      case INCOME:
-        if (value == null) {
-          unsetIncome();
-        } else {
-          setIncome((Money)value);
+          setAccountData((AccountData)value);
         }
         break;
 
@@ -502,14 +395,8 @@ public class AccountFactory {
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
-      case FULL_NAME:
-        return getFullName();
-
-      case PESEL:
-        return getPesel();
-
-      case INCOME:
-        return getIncome();
+      case ACCOUNT_DATA:
+        return getAccountData();
 
       }
       throw new java.lang.IllegalStateException();
@@ -522,12 +409,8 @@ public class AccountFactory {
       }
 
       switch (field) {
-      case FULL_NAME:
-        return isSetFullName();
-      case PESEL:
-        return isSetPesel();
-      case INCOME:
-        return isSetIncome();
+      case ACCOUNT_DATA:
+        return isSetAccountData();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -547,30 +430,12 @@ public class AccountFactory {
       if (this == that)
         return true;
 
-      boolean this_present_fullName = true && this.isSetFullName();
-      boolean that_present_fullName = true && that.isSetFullName();
-      if (this_present_fullName || that_present_fullName) {
-        if (!(this_present_fullName && that_present_fullName))
+      boolean this_present_accountData = true && this.isSetAccountData();
+      boolean that_present_accountData = true && that.isSetAccountData();
+      if (this_present_accountData || that_present_accountData) {
+        if (!(this_present_accountData && that_present_accountData))
           return false;
-        if (!this.fullName.equals(that.fullName))
-          return false;
-      }
-
-      boolean this_present_pesel = true && this.isSetPesel();
-      boolean that_present_pesel = true && that.isSetPesel();
-      if (this_present_pesel || that_present_pesel) {
-        if (!(this_present_pesel && that_present_pesel))
-          return false;
-        if (!this.pesel.equals(that.pesel))
-          return false;
-      }
-
-      boolean this_present_income = true && this.isSetIncome();
-      boolean that_present_income = true && that.isSetIncome();
-      if (this_present_income || that_present_income) {
-        if (!(this_present_income && that_present_income))
-          return false;
-        if (!this.income.equals(that.income))
+        if (!this.accountData.equals(that.accountData))
           return false;
       }
 
@@ -581,17 +446,9 @@ public class AccountFactory {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + ((isSetFullName()) ? 131071 : 524287);
-      if (isSetFullName())
-        hashCode = hashCode * 8191 + fullName.hashCode();
-
-      hashCode = hashCode * 8191 + ((isSetPesel()) ? 131071 : 524287);
-      if (isSetPesel())
-        hashCode = hashCode * 8191 + pesel.hashCode();
-
-      hashCode = hashCode * 8191 + ((isSetIncome()) ? 131071 : 524287);
-      if (isSetIncome())
-        hashCode = hashCode * 8191 + income.hashCode();
+      hashCode = hashCode * 8191 + ((isSetAccountData()) ? 131071 : 524287);
+      if (isSetAccountData())
+        hashCode = hashCode * 8191 + accountData.hashCode();
 
       return hashCode;
     }
@@ -604,32 +461,12 @@ public class AccountFactory {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetFullName()).compareTo(other.isSetFullName());
+      lastComparison = java.lang.Boolean.valueOf(isSetAccountData()).compareTo(other.isSetAccountData());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetFullName()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.fullName, other.fullName);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = java.lang.Boolean.valueOf(isSetPesel()).compareTo(other.isSetPesel());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetPesel()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.pesel, other.pesel);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = java.lang.Boolean.valueOf(isSetIncome()).compareTo(other.isSetIncome());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetIncome()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.income, other.income);
+      if (isSetAccountData()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.accountData, other.accountData);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -654,27 +491,11 @@ public class AccountFactory {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("createAccount_args(");
       boolean first = true;
 
-      sb.append("fullName:");
-      if (this.fullName == null) {
+      sb.append("accountData:");
+      if (this.accountData == null) {
         sb.append("null");
       } else {
-        sb.append(this.fullName);
-      }
-      first = false;
-      if (!first) sb.append(", ");
-      sb.append("pesel:");
-      if (this.pesel == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.pesel);
-      }
-      first = false;
-      if (!first) sb.append(", ");
-      sb.append("income:");
-      if (this.income == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.income);
+        sb.append(this.accountData);
       }
       first = false;
       sb.append(")");
@@ -684,8 +505,8 @@ public class AccountFactory {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
-      if (income != null) {
-        income.validate();
+      if (accountData != null) {
+        accountData.validate();
       }
     }
 
@@ -723,27 +544,11 @@ public class AccountFactory {
             break;
           }
           switch (schemeField.id) {
-            case 1: // FULL_NAME
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.fullName = iprot.readString();
-                struct.setFullNameIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 2: // PESEL
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.pesel = iprot.readString();
-                struct.setPeselIsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 3: // INCOME
+            case 1: // ACCOUNT_DATA
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.income = new Money();
-                struct.income.read(iprot);
-                struct.setIncomeIsSet(true);
+                struct.accountData = new AccountData();
+                struct.accountData.read(iprot);
+                struct.setAccountDataIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -763,19 +568,9 @@ public class AccountFactory {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.fullName != null) {
-          oprot.writeFieldBegin(FULL_NAME_FIELD_DESC);
-          oprot.writeString(struct.fullName);
-          oprot.writeFieldEnd();
-        }
-        if (struct.pesel != null) {
-          oprot.writeFieldBegin(PESEL_FIELD_DESC);
-          oprot.writeString(struct.pesel);
-          oprot.writeFieldEnd();
-        }
-        if (struct.income != null) {
-          oprot.writeFieldBegin(INCOME_FIELD_DESC);
-          struct.income.write(oprot);
+        if (struct.accountData != null) {
+          oprot.writeFieldBegin(ACCOUNT_DATA_FIELD_DESC);
+          struct.accountData.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -796,43 +591,23 @@ public class AccountFactory {
       public void write(org.apache.thrift.protocol.TProtocol prot, createAccount_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
-        if (struct.isSetFullName()) {
+        if (struct.isSetAccountData()) {
           optionals.set(0);
         }
-        if (struct.isSetPesel()) {
-          optionals.set(1);
-        }
-        if (struct.isSetIncome()) {
-          optionals.set(2);
-        }
-        oprot.writeBitSet(optionals, 3);
-        if (struct.isSetFullName()) {
-          oprot.writeString(struct.fullName);
-        }
-        if (struct.isSetPesel()) {
-          oprot.writeString(struct.pesel);
-        }
-        if (struct.isSetIncome()) {
-          struct.income.write(oprot);
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetAccountData()) {
+          struct.accountData.write(oprot);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, createAccount_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(3);
+        java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.fullName = iprot.readString();
-          struct.setFullNameIsSet(true);
-        }
-        if (incoming.get(1)) {
-          struct.pesel = iprot.readString();
-          struct.setPeselIsSet(true);
-        }
-        if (incoming.get(2)) {
-          struct.income = new Money();
-          struct.income.read(iprot);
-          struct.setIncomeIsSet(true);
+          struct.accountData = new AccountData();
+          struct.accountData.read(iprot);
+          struct.setAccountDataIsSet(true);
         }
       }
     }
@@ -845,22 +620,19 @@ public class AccountFactory {
   public static class createAccount_result implements org.apache.thrift.TBase<createAccount_result, createAccount_result._Fields>, java.io.Serializable, Cloneable, Comparable<createAccount_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createAccount_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.I32, (short)0);
     private static final org.apache.thrift.protocol.TField E1_FIELD_DESC = new org.apache.thrift.protocol.TField("e1", org.apache.thrift.protocol.TType.STRUCT, (short)1);
-    private static final org.apache.thrift.protocol.TField E2_FIELD_DESC = new org.apache.thrift.protocol.TField("e2", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new createAccount_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new createAccount_resultTupleSchemeFactory();
 
-    public boolean success; // required
+    public int success; // required
     public NotSupportedCurrencyException e1; // required
-    public AccountExistsException e2; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       SUCCESS((short)0, "success"),
-      E1((short)1, "e1"),
-      E2((short)2, "e2");
+      E1((short)1, "e1");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -879,8 +651,6 @@ public class AccountFactory {
             return SUCCESS;
           case 1: // E1
             return E1;
-          case 2: // E2
-            return E2;
           default:
             return null;
         }
@@ -927,11 +697,9 @@ public class AccountFactory {
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
       tmpMap.put(_Fields.E1, new org.apache.thrift.meta_data.FieldMetaData("e1", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NotSupportedCurrencyException.class)));
-      tmpMap.put(_Fields.E2, new org.apache.thrift.meta_data.FieldMetaData("e2", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountExistsException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createAccount_result.class, metaDataMap);
     }
@@ -940,15 +708,13 @@ public class AccountFactory {
     }
 
     public createAccount_result(
-      boolean success,
-      NotSupportedCurrencyException e1,
-      AccountExistsException e2)
+      int success,
+      NotSupportedCurrencyException e1)
     {
       this();
       this.success = success;
       setSuccessIsSet(true);
       this.e1 = e1;
-      this.e2 = e2;
     }
 
     /**
@@ -960,9 +726,6 @@ public class AccountFactory {
       if (other.isSetE1()) {
         this.e1 = new NotSupportedCurrencyException(other.e1);
       }
-      if (other.isSetE2()) {
-        this.e2 = new AccountExistsException(other.e2);
-      }
     }
 
     public createAccount_result deepCopy() {
@@ -972,16 +735,15 @@ public class AccountFactory {
     @Override
     public void clear() {
       setSuccessIsSet(false);
-      this.success = false;
+      this.success = 0;
       this.e1 = null;
-      this.e2 = null;
     }
 
-    public boolean isSuccess() {
+    public int getSuccess() {
       return this.success;
     }
 
-    public createAccount_result setSuccess(boolean success) {
+    public createAccount_result setSuccess(int success) {
       this.success = success;
       setSuccessIsSet(true);
       return this;
@@ -1024,37 +786,13 @@ public class AccountFactory {
       }
     }
 
-    public AccountExistsException getE2() {
-      return this.e2;
-    }
-
-    public createAccount_result setE2(AccountExistsException e2) {
-      this.e2 = e2;
-      return this;
-    }
-
-    public void unsetE2() {
-      this.e2 = null;
-    }
-
-    /** Returns true if field e2 is set (has been assigned a value) and false otherwise */
-    public boolean isSetE2() {
-      return this.e2 != null;
-    }
-
-    public void setE2IsSet(boolean value) {
-      if (!value) {
-        this.e2 = null;
-      }
-    }
-
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
       case SUCCESS:
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((java.lang.Boolean)value);
+          setSuccess((java.lang.Integer)value);
         }
         break;
 
@@ -1066,27 +804,16 @@ public class AccountFactory {
         }
         break;
 
-      case E2:
-        if (value == null) {
-          unsetE2();
-        } else {
-          setE2((AccountExistsException)value);
-        }
-        break;
-
       }
     }
 
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
       case SUCCESS:
-        return isSuccess();
+        return getSuccess();
 
       case E1:
         return getE1();
-
-      case E2:
-        return getE2();
 
       }
       throw new java.lang.IllegalStateException();
@@ -1103,8 +830,6 @@ public class AccountFactory {
         return isSetSuccess();
       case E1:
         return isSetE1();
-      case E2:
-        return isSetE2();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -1142,15 +867,6 @@ public class AccountFactory {
           return false;
       }
 
-      boolean this_present_e2 = true && this.isSetE2();
-      boolean that_present_e2 = true && that.isSetE2();
-      if (this_present_e2 || that_present_e2) {
-        if (!(this_present_e2 && that_present_e2))
-          return false;
-        if (!this.e2.equals(that.e2))
-          return false;
-      }
-
       return true;
     }
 
@@ -1158,15 +874,11 @@ public class AccountFactory {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + ((success) ? 131071 : 524287);
+      hashCode = hashCode * 8191 + success;
 
       hashCode = hashCode * 8191 + ((isSetE1()) ? 131071 : 524287);
       if (isSetE1())
         hashCode = hashCode * 8191 + e1.hashCode();
-
-      hashCode = hashCode * 8191 + ((isSetE2()) ? 131071 : 524287);
-      if (isSetE2())
-        hashCode = hashCode * 8191 + e2.hashCode();
 
       return hashCode;
     }
@@ -1195,16 +907,6 @@ public class AccountFactory {
       }
       if (isSetE1()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e1, other.e1);
-        if (lastComparison != 0) {
-          return lastComparison;
-        }
-      }
-      lastComparison = java.lang.Boolean.valueOf(isSetE2()).compareTo(other.isSetE2());
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-      if (isSetE2()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e2, other.e2);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -1238,14 +940,6 @@ public class AccountFactory {
         sb.append("null");
       } else {
         sb.append(this.e1);
-      }
-      first = false;
-      if (!first) sb.append(", ");
-      sb.append("e2:");
-      if (this.e2 == null) {
-        sb.append("null");
-      } else {
-        sb.append(this.e2);
       }
       first = false;
       sb.append(")");
@@ -1294,8 +988,8 @@ public class AccountFactory {
           }
           switch (schemeField.id) {
             case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
-                struct.success = iprot.readBool();
+              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+                struct.success = iprot.readI32();
                 struct.setSuccessIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -1306,15 +1000,6 @@ public class AccountFactory {
                 struct.e1 = new NotSupportedCurrencyException();
                 struct.e1.read(iprot);
                 struct.setE1IsSet(true);
-              } else { 
-                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-              }
-              break;
-            case 2: // E2
-              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-                struct.e2 = new AccountExistsException();
-                struct.e2.read(iprot);
-                struct.setE2IsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -1336,17 +1021,12 @@ public class AccountFactory {
         oprot.writeStructBegin(STRUCT_DESC);
         if (struct.isSetSuccess()) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          oprot.writeBool(struct.success);
+          oprot.writeI32(struct.success);
           oprot.writeFieldEnd();
         }
         if (struct.e1 != null) {
           oprot.writeFieldBegin(E1_FIELD_DESC);
           struct.e1.write(oprot);
-          oprot.writeFieldEnd();
-        }
-        if (struct.e2 != null) {
-          oprot.writeFieldBegin(E2_FIELD_DESC);
-          struct.e2.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -1373,38 +1053,27 @@ public class AccountFactory {
         if (struct.isSetE1()) {
           optionals.set(1);
         }
-        if (struct.isSetE2()) {
-          optionals.set(2);
-        }
-        oprot.writeBitSet(optionals, 3);
+        oprot.writeBitSet(optionals, 2);
         if (struct.isSetSuccess()) {
-          oprot.writeBool(struct.success);
+          oprot.writeI32(struct.success);
         }
         if (struct.isSetE1()) {
           struct.e1.write(oprot);
-        }
-        if (struct.isSetE2()) {
-          struct.e2.write(oprot);
         }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, createAccount_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(3);
+        java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.success = iprot.readBool();
+          struct.success = iprot.readI32();
           struct.setSuccessIsSet(true);
         }
         if (incoming.get(1)) {
           struct.e1 = new NotSupportedCurrencyException();
           struct.e1.read(iprot);
           struct.setE1IsSet(true);
-        }
-        if (incoming.get(2)) {
-          struct.e2 = new AccountExistsException();
-          struct.e2.read(iprot);
-          struct.setE2IsSet(true);
         }
       }
     }

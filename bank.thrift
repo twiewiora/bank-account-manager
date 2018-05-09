@@ -1,20 +1,15 @@
-namespace cpp bank
-namespace d bank
-namespace dart bank
 namespace java thrift
-namespace php bank
-namespace perl bank
-namespace haxe bank
 
-enum Currency {
-    EUR = 0,
-    USD = 1,
-    CHF = 2
+enum CurrencyType {
+    PLN = 0,
+    EUR = 1,
+    USD = 2,
+    CHF = 3
 }
 
 struct Money {
-    1: i32 value,
-    2: Currency currency
+    1: double value,
+    2: CurrencyType currency
 }
 
 struct LoanRequest {
@@ -23,29 +18,32 @@ struct LoanRequest {
 }
 
 struct LoanResponse {
-    1: Money foreignCurrency,
-    2: Money localCurrency
+    1: Money foreignCurrencyCost,
+    2: Money localCurrencyCost
+}
+
+struct AccountData {
+    1: string firstName,
+    2: string lastName,
+    3: string pesel,
+    4: Money income
 }
 
 exception NotSupportedCurrencyException {
-    1: Currency currency
 }
 
-exception AccountExistsException {
-    1: string userID
+exception AuthenticationException {
 }
 
 service AccountService {
-   string getFullName(),
-   string getPesel(),
-   Money getAccountState(),
-   Money getIncome(),
+    bool authenticateUser(1: i32 userID) throws (1: AuthenticationException e)
+    Money getAccountState(1: i32 userID)
 }
 
 service PremiumAccountService extends AccountService {
-    LoanResponse applyForLoan(1: LoanRequest request) throws (1: NotSupportedCurrencyException e),
+    LoanResponse applyForLoan(1: i32 userID, 2: LoanRequest request) throws (1: NotSupportedCurrencyException e)
 }
 
 service AccountFactory {
-    bool createAccount(1: string fullName, 2: string pesel, 3: Money income) throws (1: NotSupportedCurrencyException e1, 2: AccountExistsException e2),
+    i32 createAccount(1: AccountData accountData) throws (1: NotSupportedCurrencyException e1)
 }

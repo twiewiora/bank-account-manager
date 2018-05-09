@@ -43,13 +43,13 @@ public final class CurrencyProto {
       "y\022\r\n\005value\030\002 \001(\001\"<\n\021CurrencyValueList\022\'\n" +
       "\006values\030\001 \003(\0132\027.currency.CurrencyValue\"4" +
       "\n\014CurrencyList\022$\n\010currency\030\001 \003(\0162\022.curre" +
-      "ncy.Currency*%\n\010Currency\022\007\n\003EUR\020\000\022\007\n\003USD" +
-      "\020\001\022\007\n\003CHF\020\0022\250\001\n\016StreamCurrency\022J\n\023GetCur" +
-      "renciesStream\022\026.currency.CurrencyList\032\027." +
-      "currency.CurrencyValue\"\0000\001\022J\n\021GetCurrenc" +
-      "yStates\022\026.currency.CurrencyList\032\033.curren" +
-      "cy.CurrencyValueList\"\000B!\n\010gen.grpcB\rCurr" +
-      "encyProtoP\001\242\002\003HLWb\006proto3"
+      "ncy.Currency*.\n\010Currency\022\007\n\003PLN\020\000\022\007\n\003EUR" +
+      "\020\001\022\007\n\003USD\020\002\022\007\n\003CHF\020\0032\250\001\n\016StreamCurrency\022" +
+      "J\n\023GetCurrenciesStream\022\026.currency.Curren" +
+      "cyList\032\027.currency.CurrencyValue\"\0000\001\022J\n\021G" +
+      "etCurrencyStates\022\026.currency.CurrencyList" +
+      "\032\033.currency.CurrencyValueList\"\000B!\n\010gen.g" +
+      "rpcB\rCurrencyProtoP\001\242\002\003HLWb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
