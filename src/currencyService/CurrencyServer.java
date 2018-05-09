@@ -7,12 +7,11 @@ import gen.grpc.Currency;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
-
 public class CurrencyServer {
 
 	private static final Logger logger = Logger.getLogger(CurrencyServer.class.getName());
 
-	private final int port = 50051;
+	private final int PORT = 50051;
 
 	private Server server;
 
@@ -27,16 +26,16 @@ public class CurrencyServer {
 	private void start() throws IOException {
 
 	    for (Currency currency : Currency.values()) {
-	        if (!currency.equals(Currency.UNRECOGNIZED)) {
+	        if (!currency.equals(Currency.UNRECOGNIZED) && !currency.equals(Currency.PLN)) {
 	            new Thread(new CurrencySimulator(streamCurrency, currency)).start();
             }
         }
 
-		server = ServerBuilder.forPort(port)
+		server = ServerBuilder.forPort(PORT)
 				.addService(streamCurrency)
 				.build()
 				.start();
-		logger.info("Currency server started, listening on " + port);
+		logger.info("Currency server started, listening on " + PORT);
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
 			public void run() {

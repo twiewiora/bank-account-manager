@@ -24,14 +24,14 @@ public class CurrencySimulator implements Runnable {
         while (true) {
             try {
                 try {
-                    Thread.sleep((long)(Math.random() * 10000));
+                    Thread.sleep((long)(Math.random() * 20000));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 CurrencyValue arg = CurrencyValue
                         .newBuilder()
                         .setCurrency(currency)
-                        .setValue(Math.random() + 1)
+                        .setValue(Math.random() + 3)
                         .build();
                 streamCurrency.putNewCourse(arg);
             }
