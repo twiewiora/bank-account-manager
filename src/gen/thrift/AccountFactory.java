@@ -12,13 +12,13 @@ public class AccountFactory {
 
   public interface Iface {
 
-    public int createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException;
+    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void createAccount(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler) throws org.apache.thrift.TException;
+    public void createAccount(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<AccountConfirmation> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -42,7 +42,7 @@ public class AccountFactory {
       super(iprot, oprot);
     }
 
-    public int createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException
+    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException
     {
       send_createAccount(accountData);
       return recv_createAccount();
@@ -55,7 +55,7 @@ public class AccountFactory {
       sendBase("createAccount", args);
     }
 
-    public int recv_createAccount() throws NotSupportedCurrencyException, org.apache.thrift.TException
+    public AccountConfirmation recv_createAccount() throws NotSupportedCurrencyException, org.apache.thrift.TException
     {
       createAccount_result result = new createAccount_result();
       receiveBase(result, "createAccount");
@@ -86,16 +86,16 @@ public class AccountFactory {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void createAccount(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler) throws org.apache.thrift.TException {
+    public void createAccount(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<AccountConfirmation> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       createAccount_call method_call = new createAccount_call(accountData, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class createAccount_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.Integer> {
+    public static class createAccount_call extends org.apache.thrift.async.TAsyncMethodCall<AccountConfirmation> {
       private AccountData accountData;
-      public createAccount_call(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public createAccount_call(AccountData accountData, org.apache.thrift.async.AsyncMethodCallback<AccountConfirmation> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.accountData = accountData;
       }
@@ -108,7 +108,7 @@ public class AccountFactory {
         prot.writeMessageEnd();
       }
 
-      public java.lang.Integer getResult() throws NotSupportedCurrencyException, org.apache.thrift.TException {
+      public AccountConfirmation getResult() throws NotSupportedCurrencyException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -157,7 +157,6 @@ public class AccountFactory {
         createAccount_result result = new createAccount_result();
         try {
           result.success = iface.createAccount(args.accountData);
-          result.setSuccessIsSet(true);
         } catch (NotSupportedCurrencyException e1) {
           result.e1 = e1;
         }
@@ -182,7 +181,7 @@ public class AccountFactory {
       return processMap;
     }
 
-    public static class createAccount<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, createAccount_args, java.lang.Integer> {
+    public static class createAccount<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, createAccount_args, AccountConfirmation> {
       public createAccount() {
         super("createAccount");
       }
@@ -191,13 +190,12 @@ public class AccountFactory {
         return new createAccount_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<AccountConfirmation> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer>() { 
-          public void onComplete(java.lang.Integer o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<AccountConfirmation>() { 
+          public void onComplete(AccountConfirmation o) {
             createAccount_result result = new createAccount_result();
             result.success = o;
-            result.setSuccessIsSet(true);
             try {
               fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
             } catch (org.apache.thrift.transport.TTransportException e) {
@@ -243,7 +241,7 @@ public class AccountFactory {
         return false;
       }
 
-      public void start(I iface, createAccount_args args, org.apache.thrift.async.AsyncMethodCallback<java.lang.Integer> resultHandler) throws org.apache.thrift.TException {
+      public void start(I iface, createAccount_args args, org.apache.thrift.async.AsyncMethodCallback<AccountConfirmation> resultHandler) throws org.apache.thrift.TException {
         iface.createAccount(args.accountData,resultHandler);
       }
     }
@@ -620,13 +618,13 @@ public class AccountFactory {
   public static class createAccount_result implements org.apache.thrift.TBase<createAccount_result, createAccount_result._Fields>, java.io.Serializable, Cloneable, Comparable<createAccount_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("createAccount_result");
 
-    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.I32, (short)0);
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField E1_FIELD_DESC = new org.apache.thrift.protocol.TField("e1", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new createAccount_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new createAccount_resultTupleSchemeFactory();
 
-    public int success; // required
+    public AccountConfirmation success; // required
     public NotSupportedCurrencyException e1; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -691,13 +689,11 @@ public class AccountFactory {
     }
 
     // isset id assignments
-    private static final int __SUCCESS_ISSET_ID = 0;
-    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountConfirmation.class)));
       tmpMap.put(_Fields.E1, new org.apache.thrift.meta_data.FieldMetaData("e1", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NotSupportedCurrencyException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
@@ -708,12 +704,11 @@ public class AccountFactory {
     }
 
     public createAccount_result(
-      int success,
+      AccountConfirmation success,
       NotSupportedCurrencyException e1)
     {
       this();
       this.success = success;
-      setSuccessIsSet(true);
       this.e1 = e1;
     }
 
@@ -721,8 +716,9 @@ public class AccountFactory {
      * Performs a deep copy on <i>other</i>.
      */
     public createAccount_result(createAccount_result other) {
-      __isset_bitfield = other.__isset_bitfield;
-      this.success = other.success;
+      if (other.isSetSuccess()) {
+        this.success = new AccountConfirmation(other.success);
+      }
       if (other.isSetE1()) {
         this.e1 = new NotSupportedCurrencyException(other.e1);
       }
@@ -734,32 +730,32 @@ public class AccountFactory {
 
     @Override
     public void clear() {
-      setSuccessIsSet(false);
-      this.success = 0;
+      this.success = null;
       this.e1 = null;
     }
 
-    public int getSuccess() {
+    public AccountConfirmation getSuccess() {
       return this.success;
     }
 
-    public createAccount_result setSuccess(int success) {
+    public createAccount_result setSuccess(AccountConfirmation success) {
       this.success = success;
-      setSuccessIsSet(true);
       return this;
     }
 
     public void unsetSuccess() {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+      this.success = null;
     }
 
     /** Returns true if field success is set (has been assigned a value) and false otherwise */
     public boolean isSetSuccess() {
-      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __SUCCESS_ISSET_ID);
+      return this.success != null;
     }
 
     public void setSuccessIsSet(boolean value) {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __SUCCESS_ISSET_ID, value);
+      if (!value) {
+        this.success = null;
+      }
     }
 
     public NotSupportedCurrencyException getE1() {
@@ -792,7 +788,7 @@ public class AccountFactory {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((java.lang.Integer)value);
+          setSuccess((AccountConfirmation)value);
         }
         break;
 
@@ -849,12 +845,12 @@ public class AccountFactory {
       if (this == that)
         return true;
 
-      boolean this_present_success = true;
-      boolean that_present_success = true;
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
       if (this_present_success || that_present_success) {
         if (!(this_present_success && that_present_success))
           return false;
-        if (this.success != that.success)
+        if (!this.success.equals(that.success))
           return false;
       }
 
@@ -874,7 +870,9 @@ public class AccountFactory {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + success;
+      hashCode = hashCode * 8191 + ((isSetSuccess()) ? 131071 : 524287);
+      if (isSetSuccess())
+        hashCode = hashCode * 8191 + success.hashCode();
 
       hashCode = hashCode * 8191 + ((isSetE1()) ? 131071 : 524287);
       if (isSetE1())
@@ -932,7 +930,11 @@ public class AccountFactory {
       boolean first = true;
 
       sb.append("success:");
-      sb.append(this.success);
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
       first = false;
       if (!first) sb.append(", ");
       sb.append("e1:");
@@ -949,6 +951,9 @@ public class AccountFactory {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -961,8 +966,6 @@ public class AccountFactory {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -988,8 +991,9 @@ public class AccountFactory {
           }
           switch (schemeField.id) {
             case 0: // SUCCESS
-              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.success = iprot.readI32();
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new AccountConfirmation();
+                struct.success.read(iprot);
                 struct.setSuccessIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -1019,9 +1023,9 @@ public class AccountFactory {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.isSetSuccess()) {
+        if (struct.success != null) {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
-          oprot.writeI32(struct.success);
+          struct.success.write(oprot);
           oprot.writeFieldEnd();
         }
         if (struct.e1 != null) {
@@ -1055,7 +1059,7 @@ public class AccountFactory {
         }
         oprot.writeBitSet(optionals, 2);
         if (struct.isSetSuccess()) {
-          oprot.writeI32(struct.success);
+          struct.success.write(oprot);
         }
         if (struct.isSetE1()) {
           struct.e1.write(oprot);
@@ -1067,7 +1071,8 @@ public class AccountFactory {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.success = iprot.readI32();
+          struct.success = new AccountConfirmation();
+          struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
         if (incoming.get(1)) {

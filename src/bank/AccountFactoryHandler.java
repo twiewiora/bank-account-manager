@@ -21,19 +21,22 @@ public class AccountFactoryHandler implements AccountFactory.Iface {
     }
 
     @Override
-    public int createAccount(AccountData accountData) throws NotSupportedCurrencyException {
-        Integer userID;
+    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException {
+        AccountConfirmation accountConfirmation = new AccountConfirmation();
         Currency currencyGrpc = bankServer.thriftToGrpcCurrency(accountData.getIncome().getCurrency());
         if (currencyGrpc != null) {
-            userID = generateUserID();
+            Integer userID = generateUserID();
+            accountConfirmation.setUserID(userID);
             Money accountBalance = new Money(accountData.getIncome().getValue(), accountData.getIncome().getCurrency());
             BankAccount newBankAccount;
             if (accountData.getIncome().getValue() > LIMIT_INCOME_TO_PREMIUM) {
                 newBankAccount = new BankAccount(accountData.firstName, accountData.lastName, accountData.pesel,
                         accountBalance, accountData.income, true);
+                accountConfirmation.setIsPremium(true);
             } else {
                 newBankAccount = new BankAccount(accountData.firstName, accountData.lastName, accountData.pesel,
                         accountBalance, accountData.income, false);
+                accountConfirmation.setIsPremium(false);
             }
             bankServer.getUsersMap().put(userID, newBankAccount);
             logger.log(Level.INFO, "Create user account(ID:{0})", userID);
@@ -41,7 +44,7 @@ public class AccountFactoryHandler implements AccountFactory.Iface {
             logger.log(Level.WARNING, "NotSupportedCurrencyException was thrown for user");
             throw new NotSupportedCurrencyException();
         }
-        return userID;
+        return accountConfirmation;
     }
 
     private Integer generateUserID() {

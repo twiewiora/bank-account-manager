@@ -29,6 +29,11 @@ struct AccountData {
     4: Money income
 }
 
+struct AccountConfirmation {
+    1: i32 userID,
+    2: bool isPremium
+}
+
 exception NotSupportedCurrencyException {
 }
 
@@ -45,5 +50,5 @@ service PremiumAccountService extends AccountService {
 }
 
 service AccountFactory {
-    i32 createAccount(1: AccountData accountData) throws (1: NotSupportedCurrencyException e1)
+    AccountConfirmation createAccount(1: AccountData accountData) throws (1: NotSupportedCurrencyException e1)
 }

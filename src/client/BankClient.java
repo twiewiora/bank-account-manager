@@ -94,9 +94,14 @@ public class BankClient {
             accountData.setPesel(input.readLine());
             System.out.print("Monthly income: ");
             accountData.setIncome(new Money(Double.parseDouble(input.readLine()), CurrencyType.PLN));
-            Integer userID = accountFactoryClient.createAccount(accountData);
+            AccountConfirmation accountConfirmation = accountFactoryClient.createAccount(accountData);
             System.out.println("=============================================================");
-            System.out.println("Account created, your userID: " + userID);
+            System.out.println("Account created, your userID: " + accountConfirmation.getUserID());
+            if (accountConfirmation.isIsPremium()) {
+                System.out.println("Your account is Premium Account");
+            } else {
+                System.out.println("Your account is Normal Account");
+            }
             System.out.println("=============================================================");
         } catch (NotSupportedCurrencyException e) {
             System.out.println("=============================================================");
