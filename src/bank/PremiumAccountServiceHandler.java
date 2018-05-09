@@ -2,7 +2,6 @@ package bank;
 
 import gen.grpc.Currency;
 import gen.thrift.*;
-import org.apache.thrift.TException;
 
 import java.math.BigDecimal;
 import java.util.logging.Level;
@@ -19,7 +18,7 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
     }
 
     @Override
-    public boolean authenticateUser(int userID) throws AuthenticationException {
+    public boolean authenticateUser(String userID) throws AuthenticationException {
         if (bankServer.getUsersMap().containsKey(userID) && bankServer.getUsersMap().get(userID).isPremiumAccount()) {
             logger.log(Level.INFO, "Request - authenticate premium user(ID:{0})", userID);
             return true;
@@ -30,7 +29,7 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
     }
 
     @Override
-    public LoanResponse applyForLoan(int userID, LoanRequest request) throws TException {
+    public LoanResponse applyForLoan(String userID, LoanRequest request) throws AuthenticationException, NotSupportedCurrencyException {
         if (bankServer.getUsersMap().containsKey(userID)) {
             LoanResponse loanResponse = new LoanResponse();
 
@@ -66,7 +65,7 @@ public class PremiumAccountServiceHandler implements PremiumAccountService.Iface
     }
 
     @Override
-    public Money getAccountState(int userID) throws TException {
+    public Money getAccountState(String userID) throws AuthenticationException {
         if (bankServer.getUsersMap().containsKey(userID)) {
             logger.log(Level.INFO, "Request for account state from user(ID:{0})", userID);
             return bankServer.getUsersMap().get(userID).getAccountBalance();

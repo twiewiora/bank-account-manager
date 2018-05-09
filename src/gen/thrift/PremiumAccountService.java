@@ -12,13 +12,13 @@ public class PremiumAccountService {
 
   public interface Iface extends AccountService.Iface {
 
-    public LoanResponse applyForLoan(int userID, LoanRequest request) throws NotSupportedCurrencyException, org.apache.thrift.TException;
+    public LoanResponse applyForLoan(java.lang.String userID, LoanRequest request) throws NotSupportedCurrencyException, org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface extends AccountService .AsyncIface {
 
-    public void applyForLoan(int userID, LoanRequest request, org.apache.thrift.async.AsyncMethodCallback<LoanResponse> resultHandler) throws org.apache.thrift.TException;
+    public void applyForLoan(java.lang.String userID, LoanRequest request, org.apache.thrift.async.AsyncMethodCallback<LoanResponse> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -42,13 +42,13 @@ public class PremiumAccountService {
       super(iprot, oprot);
     }
 
-    public LoanResponse applyForLoan(int userID, LoanRequest request) throws NotSupportedCurrencyException, org.apache.thrift.TException
+    public LoanResponse applyForLoan(java.lang.String userID, LoanRequest request) throws NotSupportedCurrencyException, org.apache.thrift.TException
     {
       send_applyForLoan(userID, request);
       return recv_applyForLoan();
     }
 
-    public void send_applyForLoan(int userID, LoanRequest request) throws org.apache.thrift.TException
+    public void send_applyForLoan(java.lang.String userID, LoanRequest request) throws org.apache.thrift.TException
     {
       applyForLoan_args args = new applyForLoan_args();
       args.setUserID(userID);
@@ -87,7 +87,7 @@ public class PremiumAccountService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void applyForLoan(int userID, LoanRequest request, org.apache.thrift.async.AsyncMethodCallback<LoanResponse> resultHandler) throws org.apache.thrift.TException {
+    public void applyForLoan(java.lang.String userID, LoanRequest request, org.apache.thrift.async.AsyncMethodCallback<LoanResponse> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       applyForLoan_call method_call = new applyForLoan_call(userID, request, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -95,9 +95,9 @@ public class PremiumAccountService {
     }
 
     public static class applyForLoan_call extends org.apache.thrift.async.TAsyncMethodCall<LoanResponse> {
-      private int userID;
+      private java.lang.String userID;
       private LoanRequest request;
-      public applyForLoan_call(int userID, LoanRequest request, org.apache.thrift.async.AsyncMethodCallback<LoanResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public applyForLoan_call(java.lang.String userID, LoanRequest request, org.apache.thrift.async.AsyncMethodCallback<LoanResponse> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.userID = userID;
         this.request = request;
@@ -255,13 +255,13 @@ public class PremiumAccountService {
   public static class applyForLoan_args implements org.apache.thrift.TBase<applyForLoan_args, applyForLoan_args._Fields>, java.io.Serializable, Cloneable, Comparable<applyForLoan_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("applyForLoan_args");
 
-    private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.STRING, (short)1);
     private static final org.apache.thrift.protocol.TField REQUEST_FIELD_DESC = new org.apache.thrift.protocol.TField("request", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new applyForLoan_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new applyForLoan_argsTupleSchemeFactory();
 
-    public int userID; // required
+    public java.lang.String userID; // required
     public LoanRequest request; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -326,13 +326,11 @@ public class PremiumAccountService {
     }
 
     // isset id assignments
-    private static final int __USERID_ISSET_ID = 0;
-    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.USER_ID, new org.apache.thrift.meta_data.FieldMetaData("userID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       tmpMap.put(_Fields.REQUEST, new org.apache.thrift.meta_data.FieldMetaData("request", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, LoanRequest.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
@@ -343,12 +341,11 @@ public class PremiumAccountService {
     }
 
     public applyForLoan_args(
-      int userID,
+      java.lang.String userID,
       LoanRequest request)
     {
       this();
       this.userID = userID;
-      setUserIDIsSet(true);
       this.request = request;
     }
 
@@ -356,8 +353,9 @@ public class PremiumAccountService {
      * Performs a deep copy on <i>other</i>.
      */
     public applyForLoan_args(applyForLoan_args other) {
-      __isset_bitfield = other.__isset_bitfield;
-      this.userID = other.userID;
+      if (other.isSetUserID()) {
+        this.userID = other.userID;
+      }
       if (other.isSetRequest()) {
         this.request = new LoanRequest(other.request);
       }
@@ -369,32 +367,32 @@ public class PremiumAccountService {
 
     @Override
     public void clear() {
-      setUserIDIsSet(false);
-      this.userID = 0;
+      this.userID = null;
       this.request = null;
     }
 
-    public int getUserID() {
+    public java.lang.String getUserID() {
       return this.userID;
     }
 
-    public applyForLoan_args setUserID(int userID) {
+    public applyForLoan_args setUserID(java.lang.String userID) {
       this.userID = userID;
-      setUserIDIsSet(true);
       return this;
     }
 
     public void unsetUserID() {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __USERID_ISSET_ID);
+      this.userID = null;
     }
 
     /** Returns true if field userID is set (has been assigned a value) and false otherwise */
     public boolean isSetUserID() {
-      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __USERID_ISSET_ID);
+      return this.userID != null;
     }
 
     public void setUserIDIsSet(boolean value) {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __USERID_ISSET_ID, value);
+      if (!value) {
+        this.userID = null;
+      }
     }
 
     public LoanRequest getRequest() {
@@ -427,7 +425,7 @@ public class PremiumAccountService {
         if (value == null) {
           unsetUserID();
         } else {
-          setUserID((java.lang.Integer)value);
+          setUserID((java.lang.String)value);
         }
         break;
 
@@ -484,12 +482,12 @@ public class PremiumAccountService {
       if (this == that)
         return true;
 
-      boolean this_present_userID = true;
-      boolean that_present_userID = true;
+      boolean this_present_userID = true && this.isSetUserID();
+      boolean that_present_userID = true && that.isSetUserID();
       if (this_present_userID || that_present_userID) {
         if (!(this_present_userID && that_present_userID))
           return false;
-        if (this.userID != that.userID)
+        if (!this.userID.equals(that.userID))
           return false;
       }
 
@@ -509,7 +507,9 @@ public class PremiumAccountService {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + userID;
+      hashCode = hashCode * 8191 + ((isSetUserID()) ? 131071 : 524287);
+      if (isSetUserID())
+        hashCode = hashCode * 8191 + userID.hashCode();
 
       hashCode = hashCode * 8191 + ((isSetRequest()) ? 131071 : 524287);
       if (isSetRequest())
@@ -567,7 +567,11 @@ public class PremiumAccountService {
       boolean first = true;
 
       sb.append("userID:");
-      sb.append(this.userID);
+      if (this.userID == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.userID);
+      }
       first = false;
       if (!first) sb.append(", ");
       sb.append("request:");
@@ -599,8 +603,6 @@ public class PremiumAccountService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -626,8 +628,8 @@ public class PremiumAccountService {
           }
           switch (schemeField.id) {
             case 1: // USER_ID
-              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.userID = iprot.readI32();
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.userID = iprot.readString();
                 struct.setUserIDIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -657,9 +659,11 @@ public class PremiumAccountService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        oprot.writeFieldBegin(USER_ID_FIELD_DESC);
-        oprot.writeI32(struct.userID);
-        oprot.writeFieldEnd();
+        if (struct.userID != null) {
+          oprot.writeFieldBegin(USER_ID_FIELD_DESC);
+          oprot.writeString(struct.userID);
+          oprot.writeFieldEnd();
+        }
         if (struct.request != null) {
           oprot.writeFieldBegin(REQUEST_FIELD_DESC);
           struct.request.write(oprot);
@@ -691,7 +695,7 @@ public class PremiumAccountService {
         }
         oprot.writeBitSet(optionals, 2);
         if (struct.isSetUserID()) {
-          oprot.writeI32(struct.userID);
+          oprot.writeString(struct.userID);
         }
         if (struct.isSetRequest()) {
           struct.request.write(oprot);
@@ -703,7 +707,7 @@ public class PremiumAccountService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
-          struct.userID = iprot.readI32();
+          struct.userID = iprot.readString();
           struct.setUserIDIsSet(true);
         }
         if (incoming.get(1)) {

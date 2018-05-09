@@ -12,17 +12,17 @@ public class AccountService {
 
   public interface Iface {
 
-    public boolean authenticateUser(int userID) throws AuthenticationException, org.apache.thrift.TException;
+    public boolean authenticateUser(java.lang.String userID) throws AuthenticationException, org.apache.thrift.TException;
 
-    public Money getAccountState(int userID) throws org.apache.thrift.TException;
+    public Money getAccountState(java.lang.String userID) throws org.apache.thrift.TException;
 
   }
 
   public interface AsyncIface {
 
-    public void authenticateUser(int userID, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
+    public void authenticateUser(java.lang.String userID, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
 
-    public void getAccountState(int userID, org.apache.thrift.async.AsyncMethodCallback<Money> resultHandler) throws org.apache.thrift.TException;
+    public void getAccountState(java.lang.String userID, org.apache.thrift.async.AsyncMethodCallback<Money> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -46,13 +46,13 @@ public class AccountService {
       super(iprot, oprot);
     }
 
-    public boolean authenticateUser(int userID) throws AuthenticationException, org.apache.thrift.TException
+    public boolean authenticateUser(java.lang.String userID) throws AuthenticationException, org.apache.thrift.TException
     {
       send_authenticateUser(userID);
       return recv_authenticateUser();
     }
 
-    public void send_authenticateUser(int userID) throws org.apache.thrift.TException
+    public void send_authenticateUser(java.lang.String userID) throws org.apache.thrift.TException
     {
       authenticateUser_args args = new authenticateUser_args();
       args.setUserID(userID);
@@ -72,13 +72,13 @@ public class AccountService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "authenticateUser failed: unknown result");
     }
 
-    public Money getAccountState(int userID) throws org.apache.thrift.TException
+    public Money getAccountState(java.lang.String userID) throws org.apache.thrift.TException
     {
       send_getAccountState(userID);
       return recv_getAccountState();
     }
 
-    public void send_getAccountState(int userID) throws org.apache.thrift.TException
+    public void send_getAccountState(java.lang.String userID) throws org.apache.thrift.TException
     {
       getAccountState_args args = new getAccountState_args();
       args.setUserID(userID);
@@ -113,7 +113,7 @@ public class AccountService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void authenticateUser(int userID, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
+    public void authenticateUser(java.lang.String userID, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       authenticateUser_call method_call = new authenticateUser_call(userID, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -121,8 +121,8 @@ public class AccountService {
     }
 
     public static class authenticateUser_call extends org.apache.thrift.async.TAsyncMethodCall<java.lang.Boolean> {
-      private int userID;
-      public authenticateUser_call(int userID, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private java.lang.String userID;
+      public authenticateUser_call(java.lang.String userID, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.userID = userID;
       }
@@ -145,7 +145,7 @@ public class AccountService {
       }
     }
 
-    public void getAccountState(int userID, org.apache.thrift.async.AsyncMethodCallback<Money> resultHandler) throws org.apache.thrift.TException {
+    public void getAccountState(java.lang.String userID, org.apache.thrift.async.AsyncMethodCallback<Money> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       getAccountState_call method_call = new getAccountState_call(userID, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -153,8 +153,8 @@ public class AccountService {
     }
 
     public static class getAccountState_call extends org.apache.thrift.async.TAsyncMethodCall<Money> {
-      private int userID;
-      public getAccountState_call(int userID, org.apache.thrift.async.AsyncMethodCallback<Money> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private java.lang.String userID;
+      public getAccountState_call(java.lang.String userID, org.apache.thrift.async.AsyncMethodCallback<Money> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.userID = userID;
       }
@@ -400,12 +400,12 @@ public class AccountService {
   public static class authenticateUser_args implements org.apache.thrift.TBase<authenticateUser_args, authenticateUser_args._Fields>, java.io.Serializable, Cloneable, Comparable<authenticateUser_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("authenticateUser_args");
 
-    private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.STRING, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new authenticateUser_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new authenticateUser_argsTupleSchemeFactory();
 
-    public int userID; // required
+    public java.lang.String userID; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -466,13 +466,11 @@ public class AccountService {
     }
 
     // isset id assignments
-    private static final int __USERID_ISSET_ID = 0;
-    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.USER_ID, new org.apache.thrift.meta_data.FieldMetaData("userID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(authenticateUser_args.class, metaDataMap);
     }
@@ -481,19 +479,19 @@ public class AccountService {
     }
 
     public authenticateUser_args(
-      int userID)
+      java.lang.String userID)
     {
       this();
       this.userID = userID;
-      setUserIDIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public authenticateUser_args(authenticateUser_args other) {
-      __isset_bitfield = other.__isset_bitfield;
-      this.userID = other.userID;
+      if (other.isSetUserID()) {
+        this.userID = other.userID;
+      }
     }
 
     public authenticateUser_args deepCopy() {
@@ -502,31 +500,31 @@ public class AccountService {
 
     @Override
     public void clear() {
-      setUserIDIsSet(false);
-      this.userID = 0;
+      this.userID = null;
     }
 
-    public int getUserID() {
+    public java.lang.String getUserID() {
       return this.userID;
     }
 
-    public authenticateUser_args setUserID(int userID) {
+    public authenticateUser_args setUserID(java.lang.String userID) {
       this.userID = userID;
-      setUserIDIsSet(true);
       return this;
     }
 
     public void unsetUserID() {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __USERID_ISSET_ID);
+      this.userID = null;
     }
 
     /** Returns true if field userID is set (has been assigned a value) and false otherwise */
     public boolean isSetUserID() {
-      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __USERID_ISSET_ID);
+      return this.userID != null;
     }
 
     public void setUserIDIsSet(boolean value) {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __USERID_ISSET_ID, value);
+      if (!value) {
+        this.userID = null;
+      }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
@@ -535,7 +533,7 @@ public class AccountService {
         if (value == null) {
           unsetUserID();
         } else {
-          setUserID((java.lang.Integer)value);
+          setUserID((java.lang.String)value);
         }
         break;
 
@@ -579,12 +577,12 @@ public class AccountService {
       if (this == that)
         return true;
 
-      boolean this_present_userID = true;
-      boolean that_present_userID = true;
+      boolean this_present_userID = true && this.isSetUserID();
+      boolean that_present_userID = true && that.isSetUserID();
       if (this_present_userID || that_present_userID) {
         if (!(this_present_userID && that_present_userID))
           return false;
-        if (this.userID != that.userID)
+        if (!this.userID.equals(that.userID))
           return false;
       }
 
@@ -595,7 +593,9 @@ public class AccountService {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + userID;
+      hashCode = hashCode * 8191 + ((isSetUserID()) ? 131071 : 524287);
+      if (isSetUserID())
+        hashCode = hashCode * 8191 + userID.hashCode();
 
       return hashCode;
     }
@@ -639,7 +639,11 @@ public class AccountService {
       boolean first = true;
 
       sb.append("userID:");
-      sb.append(this.userID);
+      if (this.userID == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.userID);
+      }
       first = false;
       sb.append(")");
       return sb.toString();
@@ -660,8 +664,6 @@ public class AccountService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -687,8 +689,8 @@ public class AccountService {
           }
           switch (schemeField.id) {
             case 1: // USER_ID
-              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.userID = iprot.readI32();
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.userID = iprot.readString();
                 struct.setUserIDIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -709,9 +711,11 @@ public class AccountService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        oprot.writeFieldBegin(USER_ID_FIELD_DESC);
-        oprot.writeI32(struct.userID);
-        oprot.writeFieldEnd();
+        if (struct.userID != null) {
+          oprot.writeFieldBegin(USER_ID_FIELD_DESC);
+          oprot.writeString(struct.userID);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -735,7 +739,7 @@ public class AccountService {
         }
         oprot.writeBitSet(optionals, 1);
         if (struct.isSetUserID()) {
-          oprot.writeI32(struct.userID);
+          oprot.writeString(struct.userID);
         }
       }
 
@@ -744,7 +748,7 @@ public class AccountService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.userID = iprot.readI32();
+          struct.userID = iprot.readString();
           struct.setUserIDIsSet(true);
         }
       }
@@ -1224,12 +1228,12 @@ public class AccountService {
   public static class getAccountState_args implements org.apache.thrift.TBase<getAccountState_args, getAccountState_args._Fields>, java.io.Serializable, Cloneable, Comparable<getAccountState_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("getAccountState_args");
 
-    private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.STRING, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new getAccountState_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new getAccountState_argsTupleSchemeFactory();
 
-    public int userID; // required
+    public java.lang.String userID; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -1290,13 +1294,11 @@ public class AccountService {
     }
 
     // isset id assignments
-    private static final int __USERID_ISSET_ID = 0;
-    private byte __isset_bitfield = 0;
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.USER_ID, new org.apache.thrift.meta_data.FieldMetaData("userID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(getAccountState_args.class, metaDataMap);
     }
@@ -1305,19 +1307,19 @@ public class AccountService {
     }
 
     public getAccountState_args(
-      int userID)
+      java.lang.String userID)
     {
       this();
       this.userID = userID;
-      setUserIDIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public getAccountState_args(getAccountState_args other) {
-      __isset_bitfield = other.__isset_bitfield;
-      this.userID = other.userID;
+      if (other.isSetUserID()) {
+        this.userID = other.userID;
+      }
     }
 
     public getAccountState_args deepCopy() {
@@ -1326,31 +1328,31 @@ public class AccountService {
 
     @Override
     public void clear() {
-      setUserIDIsSet(false);
-      this.userID = 0;
+      this.userID = null;
     }
 
-    public int getUserID() {
+    public java.lang.String getUserID() {
       return this.userID;
     }
 
-    public getAccountState_args setUserID(int userID) {
+    public getAccountState_args setUserID(java.lang.String userID) {
       this.userID = userID;
-      setUserIDIsSet(true);
       return this;
     }
 
     public void unsetUserID() {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __USERID_ISSET_ID);
+      this.userID = null;
     }
 
     /** Returns true if field userID is set (has been assigned a value) and false otherwise */
     public boolean isSetUserID() {
-      return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __USERID_ISSET_ID);
+      return this.userID != null;
     }
 
     public void setUserIDIsSet(boolean value) {
-      __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __USERID_ISSET_ID, value);
+      if (!value) {
+        this.userID = null;
+      }
     }
 
     public void setFieldValue(_Fields field, java.lang.Object value) {
@@ -1359,7 +1361,7 @@ public class AccountService {
         if (value == null) {
           unsetUserID();
         } else {
-          setUserID((java.lang.Integer)value);
+          setUserID((java.lang.String)value);
         }
         break;
 
@@ -1403,12 +1405,12 @@ public class AccountService {
       if (this == that)
         return true;
 
-      boolean this_present_userID = true;
-      boolean that_present_userID = true;
+      boolean this_present_userID = true && this.isSetUserID();
+      boolean that_present_userID = true && that.isSetUserID();
       if (this_present_userID || that_present_userID) {
         if (!(this_present_userID && that_present_userID))
           return false;
-        if (this.userID != that.userID)
+        if (!this.userID.equals(that.userID))
           return false;
       }
 
@@ -1419,7 +1421,9 @@ public class AccountService {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + userID;
+      hashCode = hashCode * 8191 + ((isSetUserID()) ? 131071 : 524287);
+      if (isSetUserID())
+        hashCode = hashCode * 8191 + userID.hashCode();
 
       return hashCode;
     }
@@ -1463,7 +1467,11 @@ public class AccountService {
       boolean first = true;
 
       sb.append("userID:");
-      sb.append(this.userID);
+      if (this.userID == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.userID);
+      }
       first = false;
       sb.append(")");
       return sb.toString();
@@ -1484,8 +1492,6 @@ public class AccountService {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -1511,8 +1517,8 @@ public class AccountService {
           }
           switch (schemeField.id) {
             case 1: // USER_ID
-              if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.userID = iprot.readI32();
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+                struct.userID = iprot.readString();
                 struct.setUserIDIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -1533,9 +1539,11 @@ public class AccountService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        oprot.writeFieldBegin(USER_ID_FIELD_DESC);
-        oprot.writeI32(struct.userID);
-        oprot.writeFieldEnd();
+        if (struct.userID != null) {
+          oprot.writeFieldBegin(USER_ID_FIELD_DESC);
+          oprot.writeString(struct.userID);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -1559,7 +1567,7 @@ public class AccountService {
         }
         oprot.writeBitSet(optionals, 1);
         if (struct.isSetUserID()) {
-          oprot.writeI32(struct.userID);
+          oprot.writeString(struct.userID);
         }
       }
 
@@ -1568,7 +1576,7 @@ public class AccountService {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.userID = iprot.readI32();
+          struct.userID = iprot.readString();
           struct.setUserIDIsSet(true);
         }
       }

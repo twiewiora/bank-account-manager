@@ -18,7 +18,7 @@ public class AccountServiceHandler implements AccountService.Iface {
     }
 
     @Override
-    public boolean authenticateUser(int userID) throws AuthenticationException {
+    public boolean authenticateUser(String userID) throws AuthenticationException {
         if (bankServer.getUsersMap().containsKey(userID)) {
             logger.log(Level.INFO, "Request - authenticate user(ID:{0})", userID);
             return true;
@@ -29,7 +29,7 @@ public class AccountServiceHandler implements AccountService.Iface {
     }
 
     @Override
-    public Money getAccountState(int userID) throws AuthenticationException {
+    public Money getAccountState(String userID) throws AuthenticationException {
         if (bankServer.getUsersMap().containsKey(userID)) {
             logger.log(Level.INFO, "Request - account state user(ID:{0})", userID);
             return bankServer.getUsersMap().get(userID).getAccountBalance();

@@ -12,7 +12,7 @@ public class AccountFactory {
 
   public interface Iface {
 
-    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException;
+    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException;
 
   }
 
@@ -42,7 +42,7 @@ public class AccountFactory {
       super(iprot, oprot);
     }
 
-    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException, org.apache.thrift.TException
+    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException
     {
       send_createAccount(accountData);
       return recv_createAccount();
@@ -55,7 +55,7 @@ public class AccountFactory {
       sendBase("createAccount", args);
     }
 
-    public AccountConfirmation recv_createAccount() throws NotSupportedCurrencyException, org.apache.thrift.TException
+    public AccountConfirmation recv_createAccount() throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException
     {
       createAccount_result result = new createAccount_result();
       receiveBase(result, "createAccount");
@@ -64,6 +64,9 @@ public class AccountFactory {
       }
       if (result.e1 != null) {
         throw result.e1;
+      }
+      if (result.e2 != null) {
+        throw result.e2;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "createAccount failed: unknown result");
     }
@@ -108,7 +111,7 @@ public class AccountFactory {
         prot.writeMessageEnd();
       }
 
-      public AccountConfirmation getResult() throws NotSupportedCurrencyException, org.apache.thrift.TException {
+      public AccountConfirmation getResult() throws NotSupportedCurrencyException, AccountExistsException, org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
@@ -159,6 +162,8 @@ public class AccountFactory {
           result.success = iface.createAccount(args.accountData);
         } catch (NotSupportedCurrencyException e1) {
           result.e1 = e1;
+        } catch (AccountExistsException e2) {
+          result.e2 = e2;
         }
         return result;
       }
@@ -213,6 +218,10 @@ public class AccountFactory {
             if (e instanceof NotSupportedCurrencyException) {
               result.e1 = (NotSupportedCurrencyException) e;
               result.setE1IsSet(true);
+              msg = result;
+            } else if (e instanceof AccountExistsException) {
+              result.e2 = (AccountExistsException) e;
+              result.setE2IsSet(true);
               msg = result;
             } else if (e instanceof org.apache.thrift.transport.TTransportException) {
               _LOGGER.error("TTransportException inside handler", e);
@@ -620,17 +629,20 @@ public class AccountFactory {
 
     private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
     private static final org.apache.thrift.protocol.TField E1_FIELD_DESC = new org.apache.thrift.protocol.TField("e1", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField E2_FIELD_DESC = new org.apache.thrift.protocol.TField("e2", org.apache.thrift.protocol.TType.STRUCT, (short)2);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new createAccount_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new createAccount_resultTupleSchemeFactory();
 
     public AccountConfirmation success; // required
     public NotSupportedCurrencyException e1; // required
+    public AccountExistsException e2; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
       SUCCESS((short)0, "success"),
-      E1((short)1, "e1");
+      E1((short)1, "e1"),
+      E2((short)2, "e2");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -649,6 +661,8 @@ public class AccountFactory {
             return SUCCESS;
           case 1: // E1
             return E1;
+          case 2: // E2
+            return E2;
           default:
             return null;
         }
@@ -696,6 +710,8 @@ public class AccountFactory {
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountConfirmation.class)));
       tmpMap.put(_Fields.E1, new org.apache.thrift.meta_data.FieldMetaData("e1", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, NotSupportedCurrencyException.class)));
+      tmpMap.put(_Fields.E2, new org.apache.thrift.meta_data.FieldMetaData("e2", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountExistsException.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(createAccount_result.class, metaDataMap);
     }
@@ -705,11 +721,13 @@ public class AccountFactory {
 
     public createAccount_result(
       AccountConfirmation success,
-      NotSupportedCurrencyException e1)
+      NotSupportedCurrencyException e1,
+      AccountExistsException e2)
     {
       this();
       this.success = success;
       this.e1 = e1;
+      this.e2 = e2;
     }
 
     /**
@@ -722,6 +740,9 @@ public class AccountFactory {
       if (other.isSetE1()) {
         this.e1 = new NotSupportedCurrencyException(other.e1);
       }
+      if (other.isSetE2()) {
+        this.e2 = new AccountExistsException(other.e2);
+      }
     }
 
     public createAccount_result deepCopy() {
@@ -732,6 +753,7 @@ public class AccountFactory {
     public void clear() {
       this.success = null;
       this.e1 = null;
+      this.e2 = null;
     }
 
     public AccountConfirmation getSuccess() {
@@ -782,6 +804,30 @@ public class AccountFactory {
       }
     }
 
+    public AccountExistsException getE2() {
+      return this.e2;
+    }
+
+    public createAccount_result setE2(AccountExistsException e2) {
+      this.e2 = e2;
+      return this;
+    }
+
+    public void unsetE2() {
+      this.e2 = null;
+    }
+
+    /** Returns true if field e2 is set (has been assigned a value) and false otherwise */
+    public boolean isSetE2() {
+      return this.e2 != null;
+    }
+
+    public void setE2IsSet(boolean value) {
+      if (!value) {
+        this.e2 = null;
+      }
+    }
+
     public void setFieldValue(_Fields field, java.lang.Object value) {
       switch (field) {
       case SUCCESS:
@@ -800,6 +846,14 @@ public class AccountFactory {
         }
         break;
 
+      case E2:
+        if (value == null) {
+          unsetE2();
+        } else {
+          setE2((AccountExistsException)value);
+        }
+        break;
+
       }
     }
 
@@ -810,6 +864,9 @@ public class AccountFactory {
 
       case E1:
         return getE1();
+
+      case E2:
+        return getE2();
 
       }
       throw new java.lang.IllegalStateException();
@@ -826,6 +883,8 @@ public class AccountFactory {
         return isSetSuccess();
       case E1:
         return isSetE1();
+      case E2:
+        return isSetE2();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -863,6 +922,15 @@ public class AccountFactory {
           return false;
       }
 
+      boolean this_present_e2 = true && this.isSetE2();
+      boolean that_present_e2 = true && that.isSetE2();
+      if (this_present_e2 || that_present_e2) {
+        if (!(this_present_e2 && that_present_e2))
+          return false;
+        if (!this.e2.equals(that.e2))
+          return false;
+      }
+
       return true;
     }
 
@@ -877,6 +945,10 @@ public class AccountFactory {
       hashCode = hashCode * 8191 + ((isSetE1()) ? 131071 : 524287);
       if (isSetE1())
         hashCode = hashCode * 8191 + e1.hashCode();
+
+      hashCode = hashCode * 8191 + ((isSetE2()) ? 131071 : 524287);
+      if (isSetE2())
+        hashCode = hashCode * 8191 + e2.hashCode();
 
       return hashCode;
     }
@@ -905,6 +977,16 @@ public class AccountFactory {
       }
       if (isSetE1()) {
         lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e1, other.e1);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = java.lang.Boolean.valueOf(isSetE2()).compareTo(other.isSetE2());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetE2()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.e2, other.e2);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -942,6 +1024,14 @@ public class AccountFactory {
         sb.append("null");
       } else {
         sb.append(this.e1);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("e2:");
+      if (this.e2 == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.e2);
       }
       first = false;
       sb.append(")");
@@ -1008,6 +1098,15 @@ public class AccountFactory {
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
               break;
+            case 2: // E2
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.e2 = new AccountExistsException();
+                struct.e2.read(iprot);
+                struct.setE2IsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -1031,6 +1130,11 @@ public class AccountFactory {
         if (struct.e1 != null) {
           oprot.writeFieldBegin(E1_FIELD_DESC);
           struct.e1.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        if (struct.e2 != null) {
+          oprot.writeFieldBegin(E2_FIELD_DESC);
+          struct.e2.write(oprot);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -1057,19 +1161,25 @@ public class AccountFactory {
         if (struct.isSetE1()) {
           optionals.set(1);
         }
-        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetE2()) {
+          optionals.set(2);
+        }
+        oprot.writeBitSet(optionals, 3);
         if (struct.isSetSuccess()) {
           struct.success.write(oprot);
         }
         if (struct.isSetE1()) {
           struct.e1.write(oprot);
         }
+        if (struct.isSetE2()) {
+          struct.e2.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, createAccount_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
-        java.util.BitSet incoming = iprot.readBitSet(2);
+        java.util.BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
           struct.success = new AccountConfirmation();
           struct.success.read(iprot);
@@ -1079,6 +1189,11 @@ public class AccountFactory {
           struct.e1 = new NotSupportedCurrencyException();
           struct.e1.read(iprot);
           struct.setE1IsSet(true);
+        }
+        if (incoming.get(2)) {
+          struct.e2 = new AccountExistsException();
+          struct.e2.read(iprot);
+          struct.setE2IsSet(true);
         }
       }
     }

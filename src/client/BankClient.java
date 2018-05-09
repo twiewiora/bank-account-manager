@@ -96,7 +96,7 @@ public class BankClient {
             accountData.setIncome(new Money(Double.parseDouble(input.readLine()), CurrencyType.PLN));
             AccountConfirmation accountConfirmation = accountFactoryClient.createAccount(accountData);
             System.out.println("=============================================================");
-            System.out.println("Account created, your userID: " + accountConfirmation.getUserID());
+            System.out.println("Account created, your userID(PESEL): " + accountConfirmation.getUserID());
             if (accountConfirmation.isIsPremium()) {
                 System.out.println("Your account is Premium Account");
             } else {
@@ -107,6 +107,10 @@ public class BankClient {
             System.out.println("=============================================================");
             System.out.println("[FAIL] Client currency is not support");
             System.out.println("=============================================================");
+        } catch (AccountExistsException e) {
+            System.out.println("=============================================================");
+            System.out.println("[FAIL] Account with that PESEL exists");
+            System.out.println("=============================================================");
         } catch (TException | IOException e) {
             e.printStackTrace();
         }
@@ -115,11 +119,11 @@ public class BankClient {
     private static void loginToAccount(AccountService.Client accountServiceClient) {
         System.out.println("=============================================================");
         String line;
-        Integer userID;
+        String userID;
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.print("Your userID: ");
-            userID = Integer.parseInt(input.readLine());
+            userID = input.readLine();
             accountServiceClient.authenticateUser(userID);
             System.out.println("=============================================================");
             System.out.println("Successful login");
@@ -169,11 +173,11 @@ public class BankClient {
     private static void premiumLoginToAccount(PremiumAccountService.Client premiumAccountServiceClient) {
         System.out.println("=============================================================");
         String line;
-        Integer userID;
+        String userID;
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.print("Your userID: ");
-            userID = Integer.parseInt(input.readLine());
+            userID = input.readLine();
             premiumAccountServiceClient.authenticateUser(userID);
             System.out.println("=============================================================");
             System.out.println("Successful login");

@@ -12,8 +12,6 @@ public class AccountFactoryHandler implements AccountFactory.Iface {
 
     private BankServer bankServer;
 
-    private Integer accountsAmount = 0;
-
     private final Integer LIMIT_INCOME_TO_PREMIUM = 5000;
 
     public AccountFactoryHandler(BankServer bankServer) {
@@ -21,21 +19,24 @@ public class AccountFactoryHandler implements AccountFactory.Iface {
     }
 
     @Override
-    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException {
+    public AccountConfirmation createAccount(AccountData accountData) throws NotSupportedCurrencyException, AccountExistsException {
+        if (bankServer.getUsersMap().containsKey(accountData.getPesel())) {
+            throw new AccountExistsException();
+        }
         AccountConfirmation accountConfirmation = new AccountConfirmation();
         Currency currencyGrpc = bankServer.thriftToGrpcCurrency(accountData.getIncome().getCurrency());
         if (currencyGrpc != null) {
-            Integer userID = generateUserID();
+            String userID = accountData.getPesel();
             accountConfirmation.setUserID(userID);
             Money accountBalance = new Money(accountData.getIncome().getValue(), accountData.getIncome().getCurrency());
             BankAccount newBankAccount;
             if (accountData.getIncome().getValue() > LIMIT_INCOME_TO_PREMIUM) {
-                newBankAccount = new BankAccount(accountData.firstName, accountData.lastName, accountData.pesel,
-                        accountBalance, accountData.income, true);
+                newBankAccount = new BankAccount(accountData.getFirstName(), accountData.getLastName(),
+                        accountData.getPesel(), accountBalance, accountData.getIncome(), true);
                 accountConfirmation.setIsPremium(true);
             } else {
-                newBankAccount = new BankAccount(accountData.firstName, accountData.lastName, accountData.pesel,
-                        accountBalance, accountData.income, false);
+                newBankAccount = new BankAccount(accountData.getFirstName(), accountData.getLastName(),
+                        accountData.getPesel(), accountBalance, accountData.getIncome(), false);
                 accountConfirmation.setIsPremium(false);
             }
             bankServer.getUsersMap().put(userID, newBankAccount);
@@ -45,9 +46,5 @@ public class AccountFactoryHandler implements AccountFactory.Iface {
             throw new NotSupportedCurrencyException();
         }
         return accountConfirmation;
-    }
-
-    private Integer generateUserID() {
-        return accountsAmount++;
     }
 }

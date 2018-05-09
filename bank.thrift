@@ -30,7 +30,7 @@ struct AccountData {
 }
 
 struct AccountConfirmation {
-    1: i32 userID,
+    1: string userID,
     2: bool isPremium
 }
 
@@ -40,15 +40,18 @@ exception NotSupportedCurrencyException {
 exception AuthenticationException {
 }
 
+exception AccountExistsException {
+}
+
 service AccountService {
-    bool authenticateUser(1: i32 userID) throws (1: AuthenticationException e)
-    Money getAccountState(1: i32 userID)
+    bool authenticateUser(1: string userID) throws (1: AuthenticationException e)
+    Money getAccountState(1: string userID)
 }
 
 service PremiumAccountService extends AccountService {
-    LoanResponse applyForLoan(1: i32 userID, 2: LoanRequest request) throws (1: NotSupportedCurrencyException e)
+    LoanResponse applyForLoan(1: string userID, 2: LoanRequest request) throws (1: NotSupportedCurrencyException e)
 }
 
 service AccountFactory {
-    AccountConfirmation createAccount(1: AccountData accountData) throws (1: NotSupportedCurrencyException e1)
+    AccountConfirmation createAccount(1: AccountData accountData) throws (1: NotSupportedCurrencyException e1, 2: AccountExistsException e2)
 }

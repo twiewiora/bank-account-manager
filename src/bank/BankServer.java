@@ -30,7 +30,7 @@ public class BankServer {
 
     private CurrencyClient currencyClient = new CurrencyClient("localhost", 50051, currencies);
 
-    private Map<Integer, BankAccount> usersMap = new ConcurrentHashMap<>();
+    private Map<String, BankAccount> usersMap = new ConcurrentHashMap<>();
 
     public static void main(String [] args) {
         final BankServer bankServer = new BankServer();
@@ -80,7 +80,7 @@ public class BankServer {
         return null;
     }
 
-    public Map<Integer, BankAccount> getUsersMap() {
+    public Map<String, BankAccount> getUsersMap() {
         return usersMap;
     }
 

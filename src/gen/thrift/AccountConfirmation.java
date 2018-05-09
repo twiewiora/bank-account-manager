@@ -11,13 +11,13 @@ package gen.thrift;
 public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfirmation, AccountConfirmation._Fields>, java.io.Serializable, Cloneable, Comparable<AccountConfirmation> {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("AccountConfirmation");
 
-  private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.I32, (short)1);
+  private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userID", org.apache.thrift.protocol.TType.STRING, (short)1);
   private static final org.apache.thrift.protocol.TField IS_PREMIUM_FIELD_DESC = new org.apache.thrift.protocol.TField("isPremium", org.apache.thrift.protocol.TType.BOOL, (short)2);
 
   private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new AccountConfirmationStandardSchemeFactory();
   private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new AccountConfirmationTupleSchemeFactory();
 
-  public int userID; // required
+  public java.lang.String userID; // required
   public boolean isPremium; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
@@ -82,14 +82,13 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
   }
 
   // isset id assignments
-  private static final int __USERID_ISSET_ID = 0;
-  private static final int __ISPREMIUM_ISSET_ID = 1;
+  private static final int __ISPREMIUM_ISSET_ID = 0;
   private byte __isset_bitfield = 0;
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
     tmpMap.put(_Fields.USER_ID, new org.apache.thrift.meta_data.FieldMetaData("userID", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.IS_PREMIUM, new org.apache.thrift.meta_data.FieldMetaData("isPremium", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
@@ -100,12 +99,11 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
   }
 
   public AccountConfirmation(
-    int userID,
+    java.lang.String userID,
     boolean isPremium)
   {
     this();
     this.userID = userID;
-    setUserIDIsSet(true);
     this.isPremium = isPremium;
     setIsPremiumIsSet(true);
   }
@@ -115,7 +113,9 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
    */
   public AccountConfirmation(AccountConfirmation other) {
     __isset_bitfield = other.__isset_bitfield;
-    this.userID = other.userID;
+    if (other.isSetUserID()) {
+      this.userID = other.userID;
+    }
     this.isPremium = other.isPremium;
   }
 
@@ -125,33 +125,33 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
 
   @Override
   public void clear() {
-    setUserIDIsSet(false);
-    this.userID = 0;
+    this.userID = null;
     setIsPremiumIsSet(false);
     this.isPremium = false;
   }
 
-  public int getUserID() {
+  public java.lang.String getUserID() {
     return this.userID;
   }
 
-  public AccountConfirmation setUserID(int userID) {
+  public AccountConfirmation setUserID(java.lang.String userID) {
     this.userID = userID;
-    setUserIDIsSet(true);
     return this;
   }
 
   public void unsetUserID() {
-    __isset_bitfield = org.apache.thrift.EncodingUtils.clearBit(__isset_bitfield, __USERID_ISSET_ID);
+    this.userID = null;
   }
 
   /** Returns true if field userID is set (has been assigned a value) and false otherwise */
   public boolean isSetUserID() {
-    return org.apache.thrift.EncodingUtils.testBit(__isset_bitfield, __USERID_ISSET_ID);
+    return this.userID != null;
   }
 
   public void setUserIDIsSet(boolean value) {
-    __isset_bitfield = org.apache.thrift.EncodingUtils.setBit(__isset_bitfield, __USERID_ISSET_ID, value);
+    if (!value) {
+      this.userID = null;
+    }
   }
 
   public boolean isIsPremium() {
@@ -183,7 +183,7 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
       if (value == null) {
         unsetUserID();
       } else {
-        setUserID((java.lang.Integer)value);
+        setUserID((java.lang.String)value);
       }
       break;
 
@@ -240,12 +240,12 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
     if (this == that)
       return true;
 
-    boolean this_present_userID = true;
-    boolean that_present_userID = true;
+    boolean this_present_userID = true && this.isSetUserID();
+    boolean that_present_userID = true && that.isSetUserID();
     if (this_present_userID || that_present_userID) {
       if (!(this_present_userID && that_present_userID))
         return false;
-      if (this.userID != that.userID)
+      if (!this.userID.equals(that.userID))
         return false;
     }
 
@@ -265,7 +265,9 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
   public int hashCode() {
     int hashCode = 1;
 
-    hashCode = hashCode * 8191 + userID;
+    hashCode = hashCode * 8191 + ((isSetUserID()) ? 131071 : 524287);
+    if (isSetUserID())
+      hashCode = hashCode * 8191 + userID.hashCode();
 
     hashCode = hashCode * 8191 + ((isPremium) ? 131071 : 524287);
 
@@ -321,7 +323,11 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
     boolean first = true;
 
     sb.append("userID:");
-    sb.append(this.userID);
+    if (this.userID == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.userID);
+    }
     first = false;
     if (!first) sb.append(", ");
     sb.append("isPremium:");
@@ -373,8 +379,8 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
         }
         switch (schemeField.id) {
           case 1: // USER_ID
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.userID = iprot.readI32();
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.userID = iprot.readString();
               struct.setUserIDIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -403,9 +409,11 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(USER_ID_FIELD_DESC);
-      oprot.writeI32(struct.userID);
-      oprot.writeFieldEnd();
+      if (struct.userID != null) {
+        oprot.writeFieldBegin(USER_ID_FIELD_DESC);
+        oprot.writeString(struct.userID);
+        oprot.writeFieldEnd();
+      }
       oprot.writeFieldBegin(IS_PREMIUM_FIELD_DESC);
       oprot.writeBool(struct.isPremium);
       oprot.writeFieldEnd();
@@ -435,7 +443,7 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
       }
       oprot.writeBitSet(optionals, 2);
       if (struct.isSetUserID()) {
-        oprot.writeI32(struct.userID);
+        oprot.writeString(struct.userID);
       }
       if (struct.isSetIsPremium()) {
         oprot.writeBool(struct.isPremium);
@@ -447,7 +455,7 @@ public class AccountConfirmation implements org.apache.thrift.TBase<AccountConfi
       org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
       java.util.BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
-        struct.userID = iprot.readI32();
+        struct.userID = iprot.readString();
         struct.setUserIDIsSet(true);
       }
       if (incoming.get(1)) {
