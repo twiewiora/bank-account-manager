@@ -28,19 +28,16 @@ public class CurrencyClient implements Runnable {
 				.build();
 
         streamCurrencyBlockingStub = StreamCurrencyGrpc.newBlockingStub(channel);
-
-        for (Currency currency : currencies) {
-            currencyMap.put(currency, 3.0);
-        }
 	}
 
+	@Override
 	public void run() {
         CurrencyList currencyListToRequest = CurrencyList.newBuilder().addAllCurrency(currencyMap.keySet()).build();
 	    try {
             CurrencyValueList currencyValueListResponse = streamCurrencyBlockingStub.getCurrencyStates(currencyListToRequest);
 
             for (CurrencyValue currencyValue : currencyValueListResponse.getValuesList()) {
-                System.out.println("[Update] Currency: " + currencyValue.getCurrency().toString() + " :: " + currencyValue.getValue());
+                logger.log(Level.INFO, "[Download] Currency: " + currencyValue.getCurrency().toString() + " :: " + currencyValue.getValue());
                 currencyMap.put(currencyValue.getCurrency(), currencyValue.getValue());
             }
 
@@ -51,13 +48,13 @@ public class CurrencyClient implements Runnable {
                     CurrencyValue currencyValue = currencyValueIterator.next();
 
                     currencyMap.put(currencyValue.getCurrency(), currencyValue.getValue());
-                    System.out.println("[Update] Currency: " + currencyValue.getCurrency().toString() + " :: " + currencyValue.getValue());
+//                    logger.log(Level.INFO, "[Update] Currency: " + currencyValue.getCurrency().toString() + " :: " + currencyValue.getValue());
                 }
             } catch (StatusRuntimeException ex) {
                 logger.log(Level.WARNING, "RPC failed: {0}", ex.getStatus());
             }
         } catch (io.grpc.StatusRuntimeException e){
-            System.out.println("Could not locate currency server");
+            logger.log(Level.WARNING, "Could not locate currency server");
             System.exit(1);
         }
 	}
